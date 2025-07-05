@@ -23,6 +23,21 @@ function LandingPage() {
     <div className="min-h-screen bg-primary-blue-50">
       {/* Background container with padding - Fixed Height for Hero Section */}
       <div className="relative">
+        <div className="absolute w-full h-full z-0">
+          <img src="/assets/Shapes.svg" alt="bg" className="absolute w-full top-0 right-0 object-cover" />
+          <img src="/assets/Ellipses.svg" alt="bg" className="absolute w-full top-0 right-0 object-cover" />
+          <img src="/assets/Element-3.svg" alt="bg" className="absolute w-full top-0 right-0 object-cover translate-y-[90%]" />
+          <img src="/assets/Element-7.svg" alt="bg" className="absolute w-full top-0 right-0 object-cover translate-y-[110%]" />
+          <img src="/assets/Element-8.svg" alt="bg" className="absolute w-full top-0 right-0 object-cover translate-y-[150%]" />
+          <img src="/assets/Element-4.svg" alt="bg" className="absolute w-full top-0 left-0 object-cover translate-y-[100%]" />
+          <img src="/assets/Element-8.svg" alt="bg" className="absolute w-full top-0 right-0 object-cover translate-y-[200%]" />
+          <img src="/assets/Element-4.svg" alt="bg" className="absolute w-full top-0 left-0 object-cover translate-y-[150%]" />
+          <img src="/assets/Element-2.svg" alt="bg" className="absolute w-full top-0 right-0 object-cover translate-y-[150%]" />
+          <img src="/assets/Element-9.svg" alt="bg" className="absolute w-full top-0 left-0 object-cover translate-y-[170%]" />
+          <img src="/assets/Element-10.svg" alt="bg" className="absolute w-full top-0 right-0 object-cover translate-y-[330%]" />
+          <img src="/assets/Element-1.svg" alt="bg" className="absolute w-full top-0 right-0 object-cover translate-y-[190%]" />
+          <img src="/assets/Element.svg" alt="bg" className="absolute w-full top-0 right-0 object-cover translate-y-[180%]" />
+        </div>
         <div className="absolute inset-4 rounded-[24px] overflow-hidden" style={{ height: '1064px' }}>
           {/* Background using SVG file */}
           <div className="absolute inset-0">
