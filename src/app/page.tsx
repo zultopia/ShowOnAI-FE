@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 
 function LandingPage() {
   const [email, setEmail] = useState('');
+  const [isYearly, setIsYearly] = useState(true); // Set default ke yearly
+  const [expandedFaq, setExpandedFaq] = useState<number | null>(1); // Set default ke FAQ kedua (GEO) yang expanded
 
   const handleEmailSubmit = () => {
     if (email) {
@@ -140,6 +142,466 @@ function LandingPage() {
               >
                 여러분의 브랜드는 준비되었나요?
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Pricing Section */}
+        <section className="absolute py-24 px-4 sm:px-6 lg:px-8" style={{ marginTop: '1800px', width: '100%'}}>
+          <div className="max-w-7xl mx-auto">
+            {/* Header */}
+            <div className="text-center mb-16">
+              <p 
+                className="text-blue-600 text-sm font-medium mb-4"
+                style={{
+                  fontFamily: 'Manrope',
+                  fontWeight: '500',
+                  fontSize: '14px',
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase'
+                }}
+              >
+                PRICING
+              </p>
+              
+              <h2 
+                className="text-gray-900 text-center mb-4"
+                style={{
+                  fontFamily: 'Manrope',
+                  fontWeight: '700',
+                  fontSize: 'clamp(32px, 5vw, 56px)',
+                  lineHeight: 'clamp(40px, 6vw, 64px)'
+                }}
+              >
+                가격 정책
+              </h2>
+              
+              <p 
+                className="text-gray-600 text-center mb-8"
+                style={{
+                  fontFamily: 'Manrope',
+                  fontWeight: '400',
+                  fontSize: '18px',
+                  lineHeight: '24px'
+                }}
+              >
+                Flexible plans and solutions for business of all sizes
+              </p>
+              
+              {/* Monthly/Yearly Toggle */}
+              <div className="flex items-center justify-center gap-4 mb-12">
+                <span 
+                  className={`font-medium cursor-pointer transition-colors ${
+                    !isYearly ? 'text-blue-600' : 'text-gray-500'
+                  }`}
+                  onClick={() => setIsYearly(false)}
+                >
+                  Monthly
+                </span>
+                
+                <div className="relative">
+                  <input 
+                    type="checkbox" 
+                    className="sr-only" 
+                    checked={isYearly}
+                    onChange={() => setIsYearly(!isYearly)}
+                  />
+                  <div 
+                    className="w-12 h-6 bg-primary-blue-500 rounded-full flex items-center cursor-pointer transition-all"
+                    onClick={() => setIsYearly(!isYearly)}
+                  >
+                    <div 
+                      className={`w-5 h-5 bg-primary-blue-100 rounded-full transition-all duration-300 ${
+                        isYearly ? 'ml-auto mr-0.5' : 'ml-0.5'
+                      }`}
+                    ></div>
+                  </div>
+                </div>
+                
+                <span 
+                  className={`font-medium cursor-pointer transition-colors ${
+                    isYearly ? 'text-blue-600' : 'text-gray-500'
+                  }`}
+                  onClick={() => setIsYearly(true)}
+                >
+                  Yearly
+                </span>
+                
+                <div className="bg-secondary-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                  Save 20%
+                </div>
+              </div>
+            </div>
+            
+            {/* Pricing Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              {/* Lite Plan */}
+              <div 
+                className="bg-white rounded-2xl p-8 shadow-lg"
+                style={{
+                  border: '1px solid #E5E7EB'
+                }}
+              >
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Lite</h3>
+                  <p className="text-gray-500 text-sm mb-6">Single one time purchase, unlimited editing forever</p>
+                  
+                  <div className="mb-6">
+                    <span className="text-4xl font-bold text-blue-600">$99</span>
+                    <span className="text-gray-500 text-sm ml-1">/user per month</span>
+                  </div>
+                  
+                  <button 
+                    className="w-full bg-gray-900 text-white py-3 px-6 rounded-full font-medium hover:bg-gray-800 transition-colors"
+                  >
+                    Get started
+                  </button>
+                </div>
+                
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-4">Free includes</h4>
+                  <ul className="space-y-3">
+                    <li className="flex items-center text-gray-600">
+                      <svg className="w-5 h-5 text-gray-300 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      Unlimited projects and storage
+                    </li>
+                    <li className="flex items-center text-gray-600">
+                      <svg className="w-5 h-5 text-gray-300 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      Advanced collaboration tools
+                    </li>
+                    <li className="flex items-center text-gray-600">
+                      <svg className="w-5 h-5 text-gray-300 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      Custom branding and white-label options
+                    </li>
+                    <li className="flex items-center text-gray-600">
+                      <svg className="w-5 h-5 text-gray-300 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      Priority customer support
+                    </li>
+                    <li className="flex items-center text-gray-400">
+                      <svg className="w-5 h-5 text-gray-300 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                      Enterprise-grade security
+                    </li>
+                    <li className="flex items-center text-gray-400">
+                      <svg className="w-5 h-5 text-gray-300 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                      On-premise deployment options
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              
+              {/* Growth Plan */}
+              <div 
+                className="bg-white rounded-2xl p-8 shadow-lg"
+              >
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Growth</h3>
+                  <p className="text-gray-500 text-sm mb-6">Single one time purchase, unlimited editing forever</p>
+                  
+                  <div className="mb-6">
+                    <span className="text-4xl font-bold text-blue-600">$199</span>
+                    <span className="text-gray-500 text-sm ml-1">/user per month</span>
+                  </div>
+                  
+                  <button 
+                    className="w-full bg-gray-900 text-white py-3 px-6 rounded-full font-medium hover:bg-gray-800 transition-colors"
+                  >
+                    Get started
+                  </button>
+                </div>
+                
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-4">Free includes</h4>
+                  <ul className="space-y-3">
+                    <li className="flex items-center text-gray-600">
+                      <svg className="w-5 h-5 text-gray-300 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      Unlimited projects and storage
+                    </li>
+                    <li className="flex items-center text-gray-600">
+                      <svg className="w-5 h-5 text-gray-300 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      Advanced collaboration tools
+                    </li>
+                    <li className="flex items-center text-gray-600">
+                      <svg className="w-5 h-5 text-gray-300 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      Custom branding and white-label options
+                    </li>
+                    <li className="flex items-center text-gray-600">
+                      <svg className="w-5 h-5 text-gray-300 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      Priority customer support
+                    </li>
+                    <li className="flex items-center text-gray-400">
+                      <svg className="w-5 h-5 text-gray-300 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                      Enterprise-grade security
+                    </li>
+                    <li className="flex items-center text-gray-400">
+                      <svg className="w-5 h-5 text-gray-300 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                      On-premise deployment options
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              
+              {/* Enterprise Plan */}
+              <div 
+                className="bg-white rounded-2xl p-8 shadow-lg"
+                style={{
+                  border: '1px solid #E5E7EB'
+                }}
+              >
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Enterprise</h3>
+                  <p className="text-gray-500 text-sm mb-6">Single one time purchase, unlimited editing forever</p>
+                  
+                  <div className="mb-6">
+                    <span className="text-4xl font-bold text-blue-600">$299</span>
+                    <span className="text-gray-500 text-sm ml-1">/user per month</span>
+                  </div>
+                  
+                  <button 
+                    className="w-full bg-gray-900 text-white py-3 px-6 rounded-full font-medium hover:bg-gray-800 transition-colors"
+                  >
+                    Contact us
+                  </button>
+                </div>
+                
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-4">Free includes</h4>
+                  <ul className="space-y-3">
+                    <li className="flex items-center text-gray-600">
+                      <svg className="w-5 h-5 text-gray-300 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      Unlimited projects and storage
+                    </li>
+                    <li className="flex items-center text-gray-600">
+                      <svg className="w-5 h-5 text-gray-300 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      Advanced collaboration tools
+                    </li>
+                    <li className="flex items-center text-gray-600">
+                      <svg className="w-5 h-5 text-gray-300 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      Custom branding and white-label options
+                    </li>
+                    <li className="flex items-center text-gray-600">
+                      <svg className="w-5 h-5 text-gray-300 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      Priority customer support
+                    </li>
+                    <li className="flex items-center text-gray-600">
+                      <svg className="w-5 h-5 text-gray-300 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                      Enterprise-grade security
+                    </li>
+                    <li className="flex items-center text-gray-600">
+                      <svg className="w-5 h-5 text-gray-300 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                      On-premise deployment options
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* FAQ Section */}
+        <section className="absolute py-24 px-4 sm:px-6 lg:px-8" style={{ marginTop: '2800px', width: '100%'}}>
+          <div className="max-w-6xl mx-auto">
+            {/* Header */}
+            <div className="text-center mb-16">
+              <p 
+                className="text-blue-600 text-sm font-medium mb-4"
+                style={{
+                  fontFamily: 'Manrope',
+                  fontWeight: '500',
+                  fontSize: '14px',
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase'
+                }}
+              >
+                FREQUENTLY ASKED QUESTIONS
+              </p>
+              
+              <h2 
+                className="text-gray-900 text-center mb-4"
+                style={{
+                  fontFamily: 'Manrope',
+                  fontWeight: '700',
+                  fontSize: 'clamp(32px, 5vw, 48px)',
+                  lineHeight: 'clamp(40px, 6vw, 56px)'
+                }}
+              >
+                자주 묻는 질문
+              </h2>
+              
+              <p 
+                className="text-gray-600 text-center"
+                style={{
+                  fontFamily: 'Manrope',
+                  fontWeight: '400',
+                  fontSize: '16px',
+                  lineHeight: '24px'
+                }}
+              >
+                Contact us if you have any other questions.
+              </p>
+            </div>
+            
+            {/* FAQ Items */}
+            <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+              {/* Dropdown Closed */}
+              <div className="border-b border-gray-200">
+                <button 
+                  className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+                  onClick={() => setExpandedFaq(expandedFaq === 0 ? null : 0)}
+                >
+                  <h3 className="text-gray-800 font-medium text-lg">Dropdown Closed</h3>
+                  <span className="text-gray-400 text-2xl font-light">
+                    {expandedFaq === 0 ? '−' : '+'}
+                  </span>
+                </button>
+              </div>
+              
+              {/* GEO FAQ */}
+              <div className="border-b border-gray-200">
+                <button 
+                  className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+                  onClick={() => setExpandedFaq(expandedFaq === 1 ? null : 1)}
+                >
+                  <h3 className="text-gray-900 font-semibold text-lg">GEO는 정확히 무엇인가요? SEO와는 어떻게 다른가요?</h3>
+                  <span className="text-gray-400 text-2xl font-light">
+                    {expandedFaq === 1 ? '−' : '+'}
+                  </span>
+                </button>
+                {expandedFaq === 1 && (
+                  <div className="px-6 pb-6 border-t border-gray-100">
+                    <div className="text-gray-600 leading-relaxed space-y-3 pt-4">
+                      <p>
+                        <span className="font-medium">GEO(Generative Engine Optimization)</span> ChatGPT, Gemini, Perplexity와 같은 생성형 AI 응답 시스템에서 브랜드가 인용되도록 최적화하는 전략입니다. <span className="font-medium">SEO(Search Engine Optimization)</span>
+                        는 웹사이트가 검색 결과에 잘 노출되도록 하는 것이라면, GEO는 <span className="font-medium"> "AI가 답변할 때, 내 브랜드를 선택하게 만드는 것"</span> 을 목표로 합니다.
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+              
+              {/* GEO가 왜 중요한가요? */}
+              <div className="border-b border-gray-200">
+                <button 
+                  className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+                  onClick={() => setExpandedFaq(expandedFaq === 2 ? null : 2)}
+                >
+                  <h3 className="text-gray-900 font-semibold text-lg">GEO가 왜 중요한가요?</h3>
+                  <span className="text-gray-400 text-2xl font-light">
+                    {expandedFaq === 2 ? '−' : '+'}
+                  </span>
+                </button>
+                {expandedFaq === 2 && (
+                  <div className="px-6 pb-6 border-t border-gray-100">
+                    <div className="text-gray-600 leading-relaxed pt-4">
+                      <p>2028년까지 전체 검색 트래픽의 50% 이상이 제로 클릭으로 전환될 것으로 예상됩니다. 즉, 사용자는 더 이상 클릭하지 않고, 생성형 AI가 주는 하나의 답변만 소비합니다.
+                          이때 내 브랜드가 그 답변 안에 들어가지 못한다면, 노출 기회 자체가 사라집니다.
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+              
+              {/* GEO 최적화는 어떻게 진행되나요? */}
+              <div className="border-b border-gray-200">
+                <button 
+                  className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+                  onClick={() => setExpandedFaq(expandedFaq === 3 ? null : 3)}
+                >
+                  <h3 className="text-gray-900 font-semibold text-lg">GEO 최적화는 어떻게 진행되나요?</h3>
+                  <span className="text-gray-400 text-2xl font-light">
+                    {expandedFaq === 3 ? '−' : '+'}
+                  </span>
+                </button>
+                {expandedFaq === 3 && (
+                  <div className="px-6 pb-6 border-t border-gray-100">
+                    <div className="text-gray-600 leading-relaxed space-y-3 pt-4">
+                      <ul className="space-y-2">
+                        <li>• 브랜드 GEO 진단 리포트 제공</li>
+                        <li>• 기술적 최적화 + 키워드 분석 + 콘텐츠 주제 추천</li>
+                        <li>• 생성형 AI에 반영되는지 추적 및 개선 반복</li>
+                      </ul>
+                      <p className="mt-4">단순한 SEO를 넘어, 실제로 AI가 인용하는 콘텐츠를 설계하고 추적합니다.</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+              
+              {/* SEO도 함께 최적화해주시나요? */}
+              <div className="border-b border-gray-200">
+                <button 
+                  className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+                  onClick={() => setExpandedFaq(expandedFaq === 4 ? null : 4)}
+                >
+                  <h3 className="text-gray-900 font-semibold text-lg">SEO도 함께 최적화해주시나요?</h3>
+                  <span className="text-gray-400 text-2xl font-light">
+                    {expandedFaq === 4 ? '−' : '+'}
+                  </span>
+                </button>
+                {expandedFaq === 4 && (
+                  <div className="px-6 pb-6 border-t border-gray-100">
+                    <div className="text-gray-600 leading-relaxed pt-4">
+                      <p>네, ShowOnAI는 GEO뿐만 아니라 SEO도 함께 최적화해드립니다.생성형 AI가 콘텐츠를 학습하고 답변에 인용하려면, 웹 상에 <span className="font-medium">검색엔진에 잘 구조화된 콘텐츠(SEO)</span>가 먼저 필요합니다. 구글과 네이버 모두를 고려한 기본 SEO 세팅부터 콘텐츠 제작 및 배포까지 GEO 전략과 유기적으로 연결해 드립니다.</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+              
+              {/* 어떻게 한국 시장에 최적화되어 있나요? - Last item, no border-bottom */}
+              <div>
+                <button 
+                  className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+                  onClick={() => setExpandedFaq(expandedFaq === 5 ? null : 5)}
+                >
+                  <h3 className="text-gray-900 font-semibold text-lg">어떻게 한국 시장에 최적화되어 있나요?</h3>
+                  <span className="text-gray-400 text-2xl font-light">
+                    {expandedFaq === 5 ? '−' : '+'}
+                  </span>
+                </button>
+                {expandedFaq === 5 && (
+                  <div className="px-6 pb-6 border-t border-gray-100">
+                    <div className="text-gray-600 leading-relaxed pt-4">
+                      <p>
+                        ShowOnAI는 한국의 독특한 검색 환경과 콘텐츠 소비 흐름에 맞춰 GEO 전략을 설계합니다. 구글뿐 아니라 네이버 키워드 데이터를 함께 분석하고, ChatGPT나 Gemini와 같은 글로벌 생성형 AI는 물론, WRTN과 같은 한국형 생성형 AI 검색 플랫폼까지 최적화 범위에 포함합니다. 단순한 기술 적용이 아닌, 현지 사용자 문맥에 맞춘 로컬라이징 GEO 전략을 제공합니다.
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </section>
