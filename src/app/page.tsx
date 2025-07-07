@@ -38,8 +38,9 @@ function LandingPage() {
           <img src="/assets/Element-1.svg" alt="bg" className="absolute w-full top-0 right-0 object-cover translate-y-[190%]" />
           <img src="/assets/Element.svg" alt="bg" className="absolute w-full top-0 right-0 object-cover translate-y-[180%]" />
         </div>
-        <div className="absolute inset-4 rounded-[24px] overflow-hidden" style={{ height: '1064px' }}>
-          {/* Background using SVG file */}
+       
+       {/* Background Section */}
+        <section className="absolute inset-4 rounded-[24px] overflow-hidden" style={{ height: '1064px' }}>
           <div className="absolute inset-0">
             <img 
               src="/background.svg" 
@@ -47,7 +48,101 @@ function LandingPage() {
               className="w-[1506px] h-[964px] object-cover"
             />
           </div>
-        </div>
+        </section>
+
+        {/* Company Logos Section */}
+        <section className="absolute bottom-0 left-0 w-full" style={{ marginBottom: '-540px', marginTop: '680px' }}>
+          <div className="py-20 overflow-hidden">
+            <div className="flex animate-scroll items-center whitespace-nowrap" style={{ gap: '96px' }}>
+              <img src="/imagine-ai.svg" alt="Imagine AI" style={{ width: '100px', height: '62px' }} className="hover:opacity-100 transition-opacity" />
+              <img src="/queue.svg" alt="Queue" style={{ width: '100px', height: '62px' }} className="hover:opacity-100 transition-opacity" />
+              <img src="/astra.svg" alt="Astra" style={{ width: '100px', height: '62px' }} className="hover:opacity-100 transition-opacity" />
+              <img src="/atlas.svg" alt="Atlas" style={{ width: '100px', height: '62px' }} className="hover:opacity-100 transition-opacity" />
+              <img src="/audlabs.svg" alt="Audlabs" style={{ width: '100px', height: '62px' }} className="hover:opacity-100 transition-opacity" />
+              <img src="/shape.svg" alt="Shape" style={{ width: '100px', height: '62px' }} className="hover:opacity-100 transition-opacity" />
+              <img src="/base.svg" alt="Base" style={{ width: '100px', height: '62px' }} className="hover:opacity-100 transition-opacity" />
+              <img src="/imagine-ai.svg" alt="Imagine AI" style={{ width: '100px', height: '62px' }} className="hover:opacity-100 transition-opacity" />
+              <img src="/queue.svg" alt="Queue" style={{ width: '100px', height: '62px' }} className="hover:opacity-100 transition-opacity" />
+              <img src="/astra.svg" alt="Astra" style={{ width: '100px', height: '62px' }} className="hover:opacity-100 transition-opacity" />
+              <img src="/atlas.svg" alt="Atlas" style={{ width: '100px', height: '62px' }} className="hover:opacity-100 transition-opacity" />
+              <img src="/audlabs.svg" alt="Audlabs" style={{ width: '100px', height: '62px' }} className="hover:opacity-100 transition-opacity" />
+              <img src="/shape.svg" alt="Shape" style={{ width: '100px', height: '62px' }} className="hover:opacity-100 transition-opacity" />
+              <img src="/base.svg" alt="Base" style={{ width: '100px', height: '62px' }} className="hover:opacity-100 transition-opacity" />
+            </div>
+          </div>
+        </section>
+
+        {/* Quote Section - Moved outside background container */}
+        <section className="absolute py-24 px-4 sm:px-6 lg:px-8" style={{ marginBottom: '-1200px', marginTop: '1200px' }}>
+          <div className="max-w-6xl mx-auto">
+            {/* Main Quote - Right aligned with smaller width */}
+            <div className="mb-8 justify-end">
+              <div className="max-w-3xl" style={{ marginLeft: 'auto', marginRight: '-550px' }}>
+                <h2 
+                  className="text-gray-800 text-right"
+                  style={{
+                    fontFamily: 'Manrope',
+                    fontWeight: '600',
+                    fontSize: 'clamp(28px, 5vw, 48px)',
+                    lineHeight: 'clamp(36px, 6vw, 60px)',
+                    letterSpacing: '0%',
+                    marginBottom: '16px'
+                  }}
+                >
+                  "2028년, 기존 검색 트래픽의 50%가 생성형 AI 검색으로 대체됩니다."
+                </h2>
+                
+                {/* Attribution */}
+                <p 
+                  className="text-neutral-500 text-right"
+                  style={{
+                    fontFamily: 'Manrope',
+                    fontWeight: '500',
+                    fontSize: 'clamp(14px, 2.5vw, 22px)',
+                    lineHeight: 'clamp(18px, 3vw, 24px)',
+                    marginTop: '24px'
+                  }}
+                >
+                  —Gartner
+                </p>
+              </div>
+            </div>
+            
+            {/* Bottom Text - Left aligned with gradient */}
+            <div className="mt-16">
+              <p 
+                className="text-left text-gray-500"
+                style={{
+                  fontFamily: 'Manrope',
+                  fontWeight: '400',
+                  fontSize: 'clamp(28px, 5vw, 48px)',
+                  lineHeight: 'clamp(36px, 6vw, 60px)',
+                  marginBottom: '8px',
+                  marginLeft: '80px'
+                }}
+              >
+                제로 클릭 시대,
+              </p>
+              
+              <p 
+                className="text-left"
+                style={{
+                  fontFamily: 'Manrope',
+                  fontWeight: '600',
+                  fontSize: 'clamp(28px, 5vw, 48px)',
+                  lineHeight: 'clamp(36px, 6vw, 60px)',
+                  background: 'linear-gradient(135deg, #2353DF 0%, #36AAF3 50%, #3061E5 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  marginLeft: '80px'
+                }}
+              >
+                여러분의 브랜드는 준비되었나요?
+              </p>
+            </div>
+          </div>
+        </section>
 
         {/* Header with exact specifications */}
         <header className="relative z-50 px-4 sm:px-6 lg:px-8" style={{ paddingTop: '48px' }}>
@@ -310,12 +405,16 @@ function LandingPage() {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(-50%);
+            transform: translateX(-33.33%);
           }
         }
         
         .animate-scroll {
-          animation: scroll 40s linear infinite;
+          animation: scroll 30s linear infinite;
+        }
+        
+        .animate-scroll:hover {
+          animation-play-state: paused;
         }
       `}</style>
     </div>
