@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 function LandingPage() {
   const [email, setEmail] = useState('');
   const [isYearly, setIsYearly] = useState(true); // Set default ke yearly
-  const [expandedFaq, setExpandedFaq] = useState<number | null>(1); // Set default ke FAQ kedua (GEO) yang expanded
+  const [expandedFaq, setExpandedFaq] = useState<number[]>([1]); // Set default ke FAQ kedua (GEO) yang expanded
 
   const handleEmailSubmit = () => {
     if (email) {
@@ -246,9 +246,12 @@ function LandingPage() {
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">Lite</h3>
                   <p className="text-gray-500 text-sm mb-6">Single one time purchase, unlimited editing forever</p>
                   
-                  <div className="mb-6">
+                  <div className="mb-2">
                     <span className="text-4xl font-bold text-blue-600">$99</span>
-                    <span className="text-gray-500 text-sm ml-1">/user per month</span>
+                  </div>
+
+                   <div className="mb-6">
+                    <span className="text-blue-600 text-md ml-1">/user per month</span>
                   </div>
                   
                   <button 
@@ -309,9 +312,12 @@ function LandingPage() {
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">Growth</h3>
                   <p className="text-gray-500 text-sm mb-6">Single one time purchase, unlimited editing forever</p>
                   
-                  <div className="mb-6">
+                  <div className="mb-2">
                     <span className="text-4xl font-bold text-blue-600">$199</span>
-                    <span className="text-gray-500 text-sm ml-1">/user per month</span>
+                  </div>
+
+                   <div className="mb-6">
+                    <span className="text-blue-600 text-md ml-1">/user per month</span>
                   </div>
                   
                   <button 
@@ -375,9 +381,12 @@ function LandingPage() {
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">Enterprise</h3>
                   <p className="text-gray-500 text-sm mb-6">Single one time purchase, unlimited editing forever</p>
                   
-                  <div className="mb-6">
+                  <div className="mb-2">
                     <span className="text-4xl font-bold text-blue-600">$299</span>
-                    <span className="text-gray-500 text-sm ml-1">/user per month</span>
+                  </div>
+
+                   <div className="mb-6">
+                    <span className="text-blue-600 text-md ml-1">/user per month</span>
                   </div>
                   
                   <button 
@@ -482,11 +491,17 @@ function LandingPage() {
               <div className="border-b border-gray-200">
                 <button 
                   className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
-                  onClick={() => setExpandedFaq(expandedFaq === 0 ? null : 0)}
+                  onClick={() => {
+                    if (expandedFaq.includes(0)) {
+                      setExpandedFaq(expandedFaq.filter(id => id !== 0));
+                    } else {
+                      setExpandedFaq([...expandedFaq, 0]);
+                    }
+                  }}
                 >
                   <h3 className="text-gray-800 font-medium text-lg">Dropdown Closed</h3>
                   <span className="text-gray-400 text-2xl font-light">
-                    {expandedFaq === 0 ? '−' : '+'}
+                    {expandedFaq.includes(0) ? '−' : '+'}
                   </span>
                 </button>
               </div>
@@ -495,14 +510,20 @@ function LandingPage() {
               <div className="border-b border-gray-200">
                 <button 
                   className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
-                  onClick={() => setExpandedFaq(expandedFaq === 1 ? null : 1)}
+                  onClick={() => {
+                    if (expandedFaq.includes(1)) {
+                      setExpandedFaq(expandedFaq.filter(id => id !== 1));
+                    } else {
+                      setExpandedFaq([...expandedFaq, 1]);
+                    }
+                  }}
                 >
                   <h3 className="text-gray-900 font-semibold text-lg">GEO는 정확히 무엇인가요? SEO와는 어떻게 다른가요?</h3>
                   <span className="text-gray-400 text-2xl font-light">
-                    {expandedFaq === 1 ? '−' : '+'}
+                    {expandedFaq.includes(1) ? '−' : '+'}
                   </span>
                 </button>
-                {expandedFaq === 1 && (
+                {expandedFaq.includes(1) && (
                   <div className="px-6 pb-6 border-t border-gray-100">
                     <div className="text-gray-600 leading-relaxed space-y-3 pt-4">
                       <p>
@@ -518,14 +539,20 @@ function LandingPage() {
               <div className="border-b border-gray-200">
                 <button 
                   className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
-                  onClick={() => setExpandedFaq(expandedFaq === 2 ? null : 2)}
+                  onClick={() => {
+                    if (expandedFaq.includes(2)) {
+                      setExpandedFaq(expandedFaq.filter(id => id !== 2));
+                    } else {
+                      setExpandedFaq([...expandedFaq, 2]);
+                    }
+                  }}
                 >
                   <h3 className="text-gray-900 font-semibold text-lg">GEO가 왜 중요한가요?</h3>
                   <span className="text-gray-400 text-2xl font-light">
-                    {expandedFaq === 2 ? '−' : '+'}
+                    {expandedFaq.includes(2) ? '−' : '+'}
                   </span>
                 </button>
-                {expandedFaq === 2 && (
+                {expandedFaq.includes(2) && (
                   <div className="px-6 pb-6 border-t border-gray-100">
                     <div className="text-gray-600 leading-relaxed pt-4">
                       <p>2028년까지 전체 검색 트래픽의 50% 이상이 제로 클릭으로 전환될 것으로 예상됩니다. 즉, 사용자는 더 이상 클릭하지 않고, 생성형 AI가 주는 하나의 답변만 소비합니다.
@@ -540,14 +567,20 @@ function LandingPage() {
               <div className="border-b border-gray-200">
                 <button 
                   className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
-                  onClick={() => setExpandedFaq(expandedFaq === 3 ? null : 3)}
+                  onClick={() => {
+                    if (expandedFaq.includes(3)) {
+                      setExpandedFaq(expandedFaq.filter(id => id !== 3));
+                    } else {
+                      setExpandedFaq([...expandedFaq, 3]);
+                    }
+                  }}
                 >
                   <h3 className="text-gray-900 font-semibold text-lg">GEO 최적화는 어떻게 진행되나요?</h3>
                   <span className="text-gray-400 text-2xl font-light">
-                    {expandedFaq === 3 ? '−' : '+'}
+                    {expandedFaq.includes(3) ? '−' : '+'}
                   </span>
                 </button>
-                {expandedFaq === 3 && (
+                {expandedFaq.includes(3) && (
                   <div className="px-6 pb-6 border-t border-gray-100">
                     <div className="text-gray-600 leading-relaxed space-y-3 pt-4">
                       <ul className="space-y-2">
@@ -565,14 +598,20 @@ function LandingPage() {
               <div className="border-b border-gray-200">
                 <button 
                   className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
-                  onClick={() => setExpandedFaq(expandedFaq === 4 ? null : 4)}
+                  onClick={() => {
+                    if (expandedFaq.includes(4)) {
+                      setExpandedFaq(expandedFaq.filter(id => id !== 4));
+                    } else {
+                      setExpandedFaq([...expandedFaq, 4]);
+                    }
+                  }}
                 >
                   <h3 className="text-gray-900 font-semibold text-lg">SEO도 함께 최적화해주시나요?</h3>
                   <span className="text-gray-400 text-2xl font-light">
-                    {expandedFaq === 4 ? '−' : '+'}
+                    {expandedFaq.includes(4) ? '−' : '+'}
                   </span>
                 </button>
-                {expandedFaq === 4 && (
+                {expandedFaq.includes(4) && (
                   <div className="px-6 pb-6 border-t border-gray-100">
                     <div className="text-gray-600 leading-relaxed pt-4">
                       <p>네, ShowOnAI는 GEO뿐만 아니라 SEO도 함께 최적화해드립니다.생성형 AI가 콘텐츠를 학습하고 답변에 인용하려면, 웹 상에 <span className="font-medium">검색엔진에 잘 구조화된 콘텐츠(SEO)</span>가 먼저 필요합니다. 구글과 네이버 모두를 고려한 기본 SEO 세팅부터 콘텐츠 제작 및 배포까지 GEO 전략과 유기적으로 연결해 드립니다.</p>
@@ -585,14 +624,20 @@ function LandingPage() {
               <div>
                 <button 
                   className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
-                  onClick={() => setExpandedFaq(expandedFaq === 5 ? null : 5)}
+                  onClick={() => {
+                    if (expandedFaq.includes(5)) {
+                      setExpandedFaq(expandedFaq.filter(id => id !== 5));
+                    } else {
+                      setExpandedFaq([...expandedFaq, 5]);
+                    }
+                  }}
                 >
                   <h3 className="text-gray-900 font-semibold text-lg">어떻게 한국 시장에 최적화되어 있나요?</h3>
                   <span className="text-gray-400 text-2xl font-light">
-                    {expandedFaq === 5 ? '−' : '+'}
+                    {expandedFaq.includes(5) ? '−' : '+'}
                   </span>
                 </button>
-                {expandedFaq === 5 && (
+                {expandedFaq.includes(5) && (
                   <div className="px-6 pb-6 border-t border-gray-100">
                     <div className="text-gray-600 leading-relaxed pt-4">
                       <p>
@@ -605,6 +650,120 @@ function LandingPage() {
             </div>
           </div>
         </section>
+
+        {/* CTA Section - Final call to action */}
+        <section className="absolute px-4 sm:px-6 lg:px-8" style={{ marginTop: '5000px', width: '100%' }}>
+          <div className="relative rounded-3xl overflow-hidden" style={{ minHeight: '400px' }}>
+            {/* Background Image */}
+            <div className="absolute inset-0">
+              <img 
+                src="/above-footer.svg" 
+                alt="Background" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+            
+            {/* Content */}
+            <div className="relative z-10 flex flex-col items-center justify-center text-center py-20 px-8">
+              <h2 
+                className="text-white mb-8 max-w-4xl"
+                style={{
+                  fontFamily: 'Manrope',
+                  fontWeight: '600',
+                  fontSize: 'clamp(28px, 5vw, 40px)',
+                  lineHeight: 'clamp(36px, 6vw, 60px)'
+                }}
+              >
+                ShowOnAI와 함께,<br />
+                제로 클릭 시대의 브랜드 자리를 먼저 선점하세요.
+              </h2>
+              
+              <button 
+                onClick={handleDashboardClick}
+                className="inline-flex items-center gap-3 bg-black text-white px-10 py-5 rounded-[20px] font-medium hover:bg-gray-800 transition-colors"
+                style={{
+                  fontFamily: 'Manrope',
+                  fontWeight: '600',
+                  fontSize: '18px',
+                  marginTop: '48px'
+                }}
+              >
+                데모 요청
+                <img src="/chat.svg" alt="Chat" className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="absolute px-4 sm:px-6 lg:px-8 py-16 bg-white" style={{ marginTop: '5400px', width: '100%' }}>
+          <div className="max-w-7xl mx-auto flex items-start justify-between">
+            {/* Left side - Logo and tagline */}
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center">
+                <img src="/showonai.svg" alt="ShowOnAI" className="h-12" />
+              </div>
+              <div 
+                className="text-gray-500"
+                style={{
+                  fontFamily: 'Manrope',
+                  fontWeight: '400',
+                  fontSize: '16px'
+                }}
+              >
+                Smart local AI-powered SEO Analysis
+              </div>
+            </div>
+            
+            {/* Right side - Navigation */}
+            <div className="flex items-center gap-8" style={{ marginTop: '60px' }}>
+              <a 
+                href="#" 
+                className="text-gray-400 hover:text-gray-900 transition-colors"
+                style={{
+                  fontFamily: 'Manrope',
+                  fontWeight: '500',
+                  fontSize: '16px'
+                }}
+              >
+                About
+              </a>
+              <a 
+                href="#" 
+                className="text-gray-400 hover:text-gray-900 transition-colors"
+                style={{
+                  fontFamily: 'Manrope',
+                  fontWeight: '500',
+                  fontSize: '16px'
+                }}
+              >
+                Pricing
+              </a>
+              <a 
+                href="#" 
+                className="text-gray-400 hover:text-gray-900 transition-colors"
+                style={{
+                  fontFamily: 'Manrope',
+                  fontWeight: '500',
+                  fontSize: '16px'
+                }}
+              >
+                Docs
+              </a>
+              <a 
+                href="#" 
+                className="text-gray-400 hover:text-gray-900 transition-colors"
+                style={{
+                  fontFamily: 'Manrope',
+                  fontWeight: '500',
+                  fontSize: '16px'
+                }}
+              >
+                Blog
+              </a>
+            </div>
+          </div>
+        </footer>
 
         {/* Header with exact specifications */}
         <header className="relative z-50 px-4 sm:px-6 lg:px-8" style={{ paddingTop: '48px' }}>
