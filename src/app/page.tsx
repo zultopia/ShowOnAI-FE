@@ -509,69 +509,69 @@ const PricingSection = ({ isYearly, setIsYearly }: { isYearly: boolean, setIsYea
   ];
 
   return (
-    <section id="pricing" className="relative py-12 md:py-24 px-4 sm:px-6 lg:px-8">
+    <section id="pricing" className="relative py-8 md:py-12 lg:py-24 px-4 sm:px-6 lg:px-8">
       <div className="w-full mx-auto">
-        <div className="text-center mb-12 md:mb-16">
+        <div className="text-center mb-8 md:mb-12 lg:mb-16">
           <p className={`${typography.caption} text-blue-600 mb-4`}>PRICING</p>
           <h2 className={`${typography.h2} text-gray-900 mb-4`}>가격 정책</h2>
           <p className={`${typography.body} text-gray-600 mb-8`}>
             Flexible plans and solutions for business of all sizes
           </p>
           
-          <div className="flex items-center justify-center gap-4 mb-12">
-            <span className={`font-medium cursor-pointer transition-colors ${!isYearly ? 'text-blue-600' : 'text-gray-500'}`}>
+          <div className="flex items-center justify-center gap-2 md:gap-4 mb-8 md:mb-12">
+            <span className={`text-sm md:text-base font-medium cursor-pointer transition-colors ${!isYearly ? 'text-blue-600' : 'text-gray-500'}`}>
               Monthly
             </span>
             <button
               onClick={() => setIsYearly(!isYearly)}
-              className="relative w-12 h-6 bg-[#CBDCFB] rounded-full transition-colors"
+              className="relative w-10 h-5 md:w-12 md:h-6 bg-[#CBDCFB] rounded-full transition-colors"
             >
-              <div className={`w-5 h-5 bg-[#3D6FEA] rounded-full transition-transform duration-300 ${isYearly ? 'translate-x-6' : 'translate-x-0.5'}`}></div>
+              <div className={`w-4 h-4 md:w-5 md:h-5 bg-[#3D6FEA] rounded-full transition-transform duration-300 ${isYearly ? 'translate-x-5 md:translate-x-6' : 'translate-x-0.5'}`}></div>
             </button>
-            <span className={`font-medium cursor-pointer transition-colors ${isYearly ? 'text-blue-600' : 'text-gray-500'}`}>
+            <span className={`text-sm md:text-base font-medium cursor-pointer transition-colors ${isYearly ? 'text-blue-600' : 'text-gray-500'}`}>
               Yearly
             </span>
-            <div className="bg-[#36AAF3] text-white px-3 py-1 rounded-full text-sm font-medium">
+            <div className="bg-[#36AAF3] text-white px-2 md:px-3 py-1 rounded-full text-xs md:text-sm font-medium">
               Save 20%
             </div>
           </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-5/6 mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 max-w-6xl mx-auto">
           {plans.map((plan, index) => (
-            <div key={index} className="group bg-white rounded-2xl p-6 md:p-8 shadow-lg border border-gray-200 hover:shadow-2xl hover:-translate-y-2 hover:border-blue-300 transition-all duration-500 ease-out cursor-pointer transform-gpu will-change-transform">
+            <div key={index} className="group bg-white rounded-xl md:rounded-2xl p-4 md:p-6 lg:p-8 shadow-lg border border-gray-200 hover:shadow-2xl hover:-translate-y-2 hover:border-blue-300 transition-all duration-500 ease-out cursor-pointer transform-gpu will-change-transform">
               
-              <div className="text-center mb-8">
+              <div className="text-center mb-6 md:mb-8">
                 <h3 className={`${typography.h3} text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-400 ease-out`}>{plan.name}</h3>
-                <p className="text-gray-500 text-sm mb-16 group-hover:text-gray-600 transition-colors duration-400 ease-out">{plan.description}</p>
+                <p className="text-gray-500 text-xs md:text-sm mb-8 md:mb-16 group-hover:text-gray-600 transition-colors duration-400 ease-out">{plan.description}</p>
                 
                 <div className="mb-2">
                   <span className={`${typography.price} text-blue-600 group-hover:text-blue-700 transition-colors duration-400 ease-out`}>${plan.price}</span>
                 </div>
-                <div className="mb-8">
-                  <span className="text-blue-600 text-lg group-hover:text-blue-700 transition-colors duration-400 ease-out">/user per month</span>
+                <div className="mb-6 md:mb-8">
+                  <span className="text-blue-600 text-sm md:text-base lg:text-lg group-hover:text-blue-700 transition-colors duration-400 ease-out">/user per month</span>
                 </div>
                 
-                <button className="w-full py-3 mb-8 px-6 rounded-full font-medium bg-gray-900 text-white hover:bg-blue-600 group-hover:bg-blue-600 transition-all duration-400 ease-out transform group-hover:scale-105">
+                <button className="w-full py-2.5 md:py-3 mb-6 md:mb-8 px-4 md:px-6 rounded-full font-medium bg-gray-900 text-white hover:bg-blue-600 group-hover:bg-blue-600 transition-all duration-400 ease-out transform group-hover:scale-105 text-sm md:text-base">
                   {plan.name === 'Enterprise' ? 'Contact us' : 'Get started'}
                 </button>
               </div>
               
               <div>
-                <h4 className="font-semibold text-xl text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-400 ease-out">Free includes</h4>
-                <ul className="space-y-3">
+                <h4 className="font-semibold text-base md:text-lg lg:text-xl text-gray-900 mb-3 md:mb-4 group-hover:text-blue-600 transition-colors duration-400 ease-out">Free includes</h4>
+                <ul className="space-y-2 md:space-y-3">
                   {plan.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center text-gray-600 group-hover:text-gray-700 transition-colors duration-400 ease-out">
+                    <li key={featureIndex} className="flex items-start text-gray-600 group-hover:text-gray-700 transition-colors duration-400 ease-out">
                       {feature.included ? (
-                        <svg className="w-5 h-5 text-green-500 mr-3 group-hover:text-green-600 transition-colors duration-400 ease-out" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-4 h-4 md:w-5 md:h-5 text-green-500 mr-2 md:mr-3 mt-0.5 group-hover:text-green-600 transition-colors duration-400 ease-out flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                       ) : (
-                        <svg className="w-5 h-5 text-gray-300 mr-3 transition-colors duration-400 ease-out" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 md:w-5 md:h-5 text-gray-300 mr-2 md:mr-3 mt-0.5 transition-colors duration-400 ease-out flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                         </svg>
                       )}
-                      <span className={feature.included ? 'text-gray-600 group-hover:text-gray-700 transition-colors duration-400 ease-out' : 'text-gray-400'}>
+                      <span className={`text-sm md:text-base ${feature.included ? 'text-gray-600 group-hover:text-gray-700 transition-colors duration-400 ease-out' : 'text-gray-400'}`}>
                         {feature.text}
                       </span>
                     </li>
@@ -691,7 +691,7 @@ const CTASection = ({ onDashboardClick }: { onDashboardClick: () => void }) => (
 const Footer = () => (
   <footer className="relative px-4 sm:px-6 lg:px-8 py-12 md:py-16 bg-white">
     <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start justify-between space-y-8 md:space-y-0">
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col items-start gap-4">
         <img src="/showonai.svg" alt="ShowOnAI" className="h-12" />
         <p className="text-gray-500">Smart local AI-powered SEO Analysis</p>
       </div>
