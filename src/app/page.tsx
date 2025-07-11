@@ -661,27 +661,24 @@ const FAQSection = ({ expandedFaq, setExpandedFaq }: { expandedFaq: number[], se
 };
 
 const CTASection = ({ onDashboardClick }: { onDashboardClick: () => void }) => (
-  <section className="relative px-4 sm:px-6 lg:px-8 pt-8 md:pt-12">
-    <div className="relative rounded-t-3xl overflow-hidden flex items-center justify-center" style={{
+  <section className="relative px-4 sm:px-6 lg:px-8 pt-4 md:pt-8 lg:pt-12">
+    <div className="relative rounded-t-2xl md:rounded-t-3xl overflow-hidden flex items-center justify-center min-h-[300px] md:min-h-[400px]" style={{
       backgroundImage: 'url(/above-footer.svg)',
       backgroundSize: 'cover',
       backgroundPosition: 'center'
     }}>
-
-      <div className="relative z-10 flex flex-col items-center justify-center text-center py-16 md:py-20 px-6 md:px-8">
-        <h2 className={`${typography.h2} text-white mb-6 md:mb-8 max-w-5xl`}>
+      <div className="relative z-10 flex flex-col items-center justify-center text-center py-12 md:py-16 lg:py-20 px-6 md:px-8">
+        <h2 className="font-manrope font-bold text-xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl leading-tight text-white mb-6 md:mb-8 max-w-4xl">
           ShowOnAI와 함께,<br />
           제로 클릭 시대의 브랜드 자리를 먼저 선점하세요.
         </h2>
         
         <button 
           onClick={onDashboardClick}
-          className="inline-flex items-center gap-2 bg-black text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-medium text-sm md:text-base hover:bg-gray-800 transition-colors shadow-lg"
+          className="inline-flex items-center gap-2 bg-black text-white px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-[20px] font-medium text-sm md:text-base hover:bg-gray-800 transition-colors shadow-lg active:scale-95"
         >
           데모 요청
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="w-4 h-4">
-            <path d="M8 12H16M16 12L12 8M16 12L12 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
+          <img src="/chat.svg" alt="Chat" className="w-3 h-3 sm:w-4 sm:h-4" />
         </button>
       </div>
     </div>
@@ -689,18 +686,18 @@ const CTASection = ({ onDashboardClick }: { onDashboardClick: () => void }) => (
 );
 
 const Footer = () => (
-  <footer className="relative px-4 sm:px-6 lg:px-8 py-12 md:py-16 bg-white">
-    <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start justify-between space-y-8 md:space-y-0">
-      <div className="flex flex-col items-start gap-4">
-        <img src="/showonai.svg" alt="ShowOnAI" className="h-12" />
-        <p className="text-gray-500">Smart local AI-powered SEO Analysis</p>
+  <footer className="relative px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16 bg-white">
+    <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start justify-between space-y-6 md:space-y-0">
+      <div className="flex flex-col items-start gap-3 md:gap-4">
+        <img src="/showonai.svg" alt="ShowOnAI" className="h-10 md:h-12" />
+        <p className="text-gray-500 text-sm md:text-base">Smart local AI-powered SEO Analysis</p>
       </div>
       
-      <div className="flex flex-wrap items-end gap-6 md:gap-8 md:self-end">
-        <a href="#" className="text-gray-400 hover:text-gray-900 transition-colors font-medium">About</a>
-        <a href="#pricing" className="text-gray-400 hover:text-gray-900 transition-colors font-medium">Pricing</a>
-        <a href="#" className="text-gray-400 hover:text-gray-900 transition-colors font-medium">Docs</a>
-        <a href="#" className="text-gray-400 hover:text-gray-900 transition-colors font-medium">Blog</a>
+      <div className="flex flex-wrap items-end gap-4 sm:gap-6 md:gap-8 md:self-end">
+        <a href="#" className="text-gray-400 hover:text-gray-900 transition-colors font-medium text-sm md:text-base">About</a>
+        <a href="#pricing" className="text-gray-400 hover:text-gray-900 transition-colors font-medium text-sm md:text-base">Pricing</a>
+        <a href="#" className="text-gray-400 hover:text-gray-900 transition-colors font-medium text-sm md:text-base">Docs</a>
+        <a href="#" className="text-gray-400 hover:text-gray-900 transition-colors font-medium text-sm md:text-base">Blog</a>
       </div>
     </div>
   </footer>
@@ -757,14 +754,14 @@ function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-blue-50 font-manrope scroll-smooth">
-      <div className="relative pt-4">
+    <div className="min-h-screen bg-blue-50 font-manrope scroll-smooth flex flex-col">
+      <div className="relative flex-shrink-0">
         <BackgroundElement />
         
         <div 
           className="relative z-10 rounded-[24px] mx-4 overflow-hidden" 
           style={{ 
-            height: '120vh',
+            height: 'clamp(600px, 100vh, 1200px)',
             minHeight: '600px',
             backgroundImage: 'url(/background.svg)', 
             backgroundSize: 'cover', 
@@ -784,15 +781,17 @@ function LandingPage() {
         </div>
       </div>
       
-      <CompanyLogos />
-      <QuoteSection />
-      <FeaturesSection />
-      <PricingSection isYearly={isYearly} setIsYearly={setIsYearly} />
-      <FAQSection expandedFaq={expandedFaq} setExpandedFaq={setExpandedFaq} />
+      <div className="flex-grow flex flex-col">
+        <CompanyLogos />
+        <QuoteSection />
+        <FeaturesSection />
+        <PricingSection isYearly={isYearly} setIsYearly={setIsYearly} />
+        <FAQSection expandedFaq={expandedFaq} setExpandedFaq={setExpandedFaq} />
 
-      <div className="relative bottom-0">
-        <CTASection onDashboardClick={handleDashboardClick} />
-        <Footer />
+        <div className="mt-auto">
+          <CTASection onDashboardClick={handleDashboardClick} />
+          <Footer />
+        </div>
       </div>
       
       <style jsx>{`
