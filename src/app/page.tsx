@@ -799,7 +799,7 @@ function LandingPage() {
         <BackgroundElement />
         
         <div 
-          className="relative z-10 rounded-[24px] mx-4 overflow-hidden" 
+          className="relative z-10 rounded-[24px] mx-4 mt-1 sm:mt-2 md:mt-3 lg:mt-4 overflow-hidden" 
           style={{ 
             height: 'clamp(600px, 100vh, 1200px)',
             minHeight: '600px',
