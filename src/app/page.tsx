@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { DemoFormData, DemoDialogProps } from '@/types/dialog';
 
 const typography = {
   h1: "font-manrope font-semibold text-4xl md:text-5xl lg:text-6xl leading-tight",
@@ -13,6 +14,192 @@ const typography = {
   body: "font-manrope font-normal text-base leading-relaxed",
   caption: "font-manrope font-medium text-sm uppercase tracking-wider",
   price: "font-manrope font-bold text-4xl md:text-5xl",
+};
+
+const DemoDialog = ({ isOpen, onClose, formData, setFormData }: DemoDialogProps) => {
+  const employeeOptions = [
+    "1-10 employees",
+    "11-50 employees", 
+    "51-200 employees",
+    "201-1000 employees",
+    "1000+ employees"
+  ];
+
+  const timelineOptions = [
+    "Within 1 month",
+    "1-3 months",
+    "3-6 months", 
+    "6-12 months",
+    "More than 1 year"
+  ];
+
+  const agencyOptions = [
+    "In-house team",
+    "Marketing agency",
+    "SEO agency",
+    "Consulting firm",
+    "Other"
+  ];
+
+  useEffect(() => {
+    if (isOpen) {
+      const scrollY = window.scrollY;
+      
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      
+      return () => {
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Form submitted:', formData);
+    onClose();
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
+      <div 
+        className="absolute inset-0 bg-black/50"
+        onClick={onClose}
+      ></div>
+      
+      <div className="relative bg-white rounded-2xl md:rounded-3xl p-6 md:p-8 w-full max-w-md md:max-w-4xl shadow-2xl border border-gray-100 transform transition-all duration-300 scale-100 max-h-[90vh] overflow-y-auto">
+        <div className="mb-6">
+          <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-50 rounded-lg md:rounded-xl flex items-center justify-center mb-4">
+            <img src="/call-calling.svg" alt="Phone" className="w-5 h-5 md:w-6 md:h-6" />
+          </div>
+          
+          <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 leading-tight">
+            Intro Call with{' '}
+            <span className="bg-gradient-to-r from-blue-600 via-blue-400 to-blue-600 bg-clip-text text-transparent">
+              ShowOnAI!
+            </span>
+          </h2>
+          
+          <p className="text-gray-500 text-sm md:text-base leading-relaxed">
+            For enterprises plans or consultation. Discovery call with a member of the team.
+          </p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-4 md:space-y-5">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Name
+            </label>
+            <input
+              type="text"
+              value={formData.name}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => 
+                setFormData({...formData, name: e.target.value})
+              }
+              placeholder="Enter your full name"
+              className="w-full px-3 md:px-4 py-3 md:py-4 bg-gray-50 border-0 rounded-lg md:rounded-xl text-gray-700 text-sm outline-none transition-all focus:bg-white focus:shadow-lg focus:ring-2 focus:ring-blue-500/20 placeholder-gray-400"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Number of Employees
+            </label>
+            <div className="relative">
+              <select
+                value={formData.employees}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => 
+                  setFormData({...formData, employees: e.target.value})
+                }
+                className="w-full px-3 md:px-4 py-3 md:py-4 bg-gray-50 border-0 rounded-lg md:rounded-xl text-gray-700 text-sm outline-none appearance-none transition-all focus:bg-white focus:shadow-lg focus:ring-2 focus:ring-blue-500/20 cursor-pointer hover:bg-gray-100"
+              >
+                <option value="" disabled className="text-gray-400">Select company size</option>
+                {employeeOptions.map((option, index) => (
+                  <option key={index} value={option} className="text-gray-700 py-2">{option}</option>
+                ))}
+              </select>
+              <div className="absolute right-3 md:right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                <svg className="w-4 h-4 md:w-5 md:h-5 text-gray-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Timeline for Investing in GEO Strategy
+            </label>
+            <div className="relative">
+              <select
+                value={formData.timeline}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => 
+                  setFormData({...formData, timeline: e.target.value})
+                }
+                className="w-full px-3 md:px-4 py-3 md:py-4 bg-gray-50 border-0 rounded-lg md:rounded-xl text-gray-700 text-sm outline-none appearance-none transition-all focus:bg-white focus:shadow-lg focus:ring-2 focus:ring-blue-500/20 cursor-pointer hover:bg-gray-100"
+              >
+                <option value="" disabled className="text-gray-400">Select timeline</option>
+                {timelineOptions.map((option, index) => (
+                  <option key={index} value={option} className="text-gray-700 py-2">{option}</option>
+                ))}
+              </select>
+              <div className="absolute right-3 md:right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                <svg className="w-4 h-4 md:w-5 md:h-5 text-gray-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Agency
+            </label>
+            <div className="relative">
+              <select
+                value={formData.agency}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => 
+                  setFormData({...formData, agency: e.target.value})
+                }
+                className="w-full px-3 md:px-4 py-3 md:py-4 bg-gray-50 border-0 rounded-lg md:rounded-xl text-gray-700 text-sm outline-none appearance-none transition-all focus:bg-white focus:shadow-lg focus:ring-2 focus:ring-blue-500/20 cursor-pointer hover:bg-gray-100"
+              >
+                <option value="" disabled className="text-gray-400">Select agency type</option>
+                {agencyOptions.map((option, index) => (
+                  <option key={index} value={option} className="text-gray-700 py-2">{option}</option>
+                ))}
+              </select>
+              <div className="absolute right-3 md:right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                <svg className="w-4 h-4 md:w-5 md:h-5 text-gray-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex justify-center md:justify-end pt-2 md:pt-4">
+            <button
+              type="submit"
+              className="w-full md:w-auto bg-gray-900 text-white py-3 px-6 md:px-8 rounded-lg md:rounded-xl font-medium hover:bg-gray-800 transition-all duration-200 flex items-center justify-center gap-2 text-sm shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95"
+            >
+              Continue
+              <svg className="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 };
 
 const BackgroundElement = () => {
@@ -44,29 +231,29 @@ const BackgroundElement = () => {
 };
 
 const Header = ({ onLoginClick, onDashboardClick }: { onLoginClick: () => void, onDashboardClick: () => void }) => (
-  <header className="relative z-50 px-4 sm:px-6 lg:px-8 pt-6 md:pt-12">
+  <header className="relative z-50 px-4 sm:px-6 lg:px-8 pt-4 md:pt-6 lg:pt-12">
     <div className="max-w-7xl mx-auto flex justify-center">
-      <nav className="flex items-center justify-between w-full max-w-5xl h-12 md:h-15 px-4 md:px-6 py-2 rounded-full border border-white/60 bg-white/30 backdrop-blur-lg">
+      <nav className="flex items-center justify-between w-full max-w-5xl h-10 md:h-12 lg:h-15 px-3 md:px-4 lg:px-6 py-2 rounded-full border border-white/60 bg-white/30 backdrop-blur-lg">
         <div className="flex items-center">
-          <img src="/showonai-white.svg" alt="ShowOnAI" className="h-8 md:h-11" />
+          <img src="/showonai-white.svg" alt="ShowOnAI" className="h-6 md:h-8 lg:h-11" />
         </div>
 
-        <div className="hidden md:flex items-center space-x-8">
+        <div className="hidden lg:flex items-center space-x-8">
           <a href="#features" className="text-white/90 hover:text-white transition-colors font-medium">기능</a>
           <a href="#pricing" className="text-white/90 hover:text-white transition-colors font-medium">가격정책</a>
           <a href="#" className="text-white/90 hover:text-white transition-colors font-medium">블로그</a>
         </div>
 
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-1 md:space-x-2">
           <button
             onClick={onDashboardClick}
-            className="px-3 md:px-4 py-2 rounded-full bg-white text-blue-600 font-semibold text-sm md:text-base hover:bg-gray-50 transition-colors"
+            className="px-2 md:px-3 lg:px-4 py-1.5 md:py-2 rounded-full bg-white text-blue-600 font-semibold text-xs md:text-sm lg:text-base hover:bg-gray-50 transition-colors active:scale-95"
           >
             데모 요청
           </button>
           <button
             onClick={onLoginClick}
-            className="px-3 md:px-4 py-2 rounded-full bg-blue-600 text-white font-semibold text-sm md:text-base hover:bg-blue-700 transition-colors"
+            className="px-2 md:px-3 lg:px-4 py-1.5 md:py-2 rounded-full bg-blue-600 text-white font-semibold text-xs md:text-sm lg:text-base hover:bg-blue-700 transition-colors active:scale-95"
           >
             로그인
           </button>
@@ -297,7 +484,6 @@ const PricingSection = ({ isYearly, setIsYearly }: { isYearly: boolean, setIsYea
       name: "Growth", 
       price: 199,
       description: "Single one time purchase, unlimited editing forever",
-      popular: true,
       features: [
         { text: "Unlimited projects and storage", included: true },
         { text: "Advanced collaboration tools", included: true },
@@ -338,14 +524,14 @@ const PricingSection = ({ isYearly, setIsYearly }: { isYearly: boolean, setIsYea
             </span>
             <button
               onClick={() => setIsYearly(!isYearly)}
-              className="relative w-12 h-6 bg-blue-500 rounded-full transition-colors"
+              className="relative w-12 h-6 bg-[#CBDCFB] rounded-full transition-colors"
             >
-              <div className={`w-5 h-5 bg-white rounded-full transition-transform duration-300 ${isYearly ? 'translate-x-6' : 'translate-x-0.5'}`}></div>
+              <div className={`w-5 h-5 bg-[#3D6FEA] rounded-full transition-transform duration-300 ${isYearly ? 'translate-x-6' : 'translate-x-0.5'}`}></div>
             </button>
             <span className={`font-medium cursor-pointer transition-colors ${isYearly ? 'text-blue-600' : 'text-gray-500'}`}>
               Yearly
             </span>
-            <div className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+            <div className="bg-[#36AAF3] text-white px-3 py-1 rounded-full text-sm font-medium">
               Save 20%
             </div>
           </div>
@@ -353,46 +539,39 @@ const PricingSection = ({ isYearly, setIsYearly }: { isYearly: boolean, setIsYea
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-5/6 mx-auto">
           {plans.map((plan, index) => (
-            <div key={index} className={`bg-white rounded-2xl p-6 md:p-8 shadow-lg border ${plan.popular ? 'border-blue-500 ring-2 ring-blue-500 ring-opacity-20' : 'border-gray-200'}`}>
-              {plan.popular && (
-                <div className="relative">
-                  <div className="absolute -top-10 -left-2 bg-blue-500 text-white px-4 py-2 rounded-b-lg text-sm font-medium w-fit shadow-lg z-10">
-                    Most Popular
-                  </div>
-                </div>
-              )}
+            <div key={index} className="group bg-white rounded-2xl p-6 md:p-8 shadow-lg border border-gray-200 hover:shadow-2xl hover:-translate-y-2 hover:border-blue-300 transition-all duration-500 ease-out cursor-pointer transform-gpu will-change-transform">
               
               <div className="text-center mb-8">
-                <h3 className={`${typography.h3} text-gray-900 mb-2`}>{plan.name}</h3>
-                <p className="text-gray-500 text-sm mb-16">{plan.description}</p>
+                <h3 className={`${typography.h3} text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-400 ease-out`}>{plan.name}</h3>
+                <p className="text-gray-500 text-sm mb-16 group-hover:text-gray-600 transition-colors duration-400 ease-out">{plan.description}</p>
                 
                 <div className="mb-2">
-                  <span className={`${typography.price} text-blue-600`}>${plan.price}</span>
+                  <span className={`${typography.price} text-blue-600 group-hover:text-blue-700 transition-colors duration-400 ease-out`}>${plan.price}</span>
                 </div>
                 <div className="mb-8">
-                  <span className="text-blue-600 text-lg">/user per month</span>
+                  <span className="text-blue-600 text-lg group-hover:text-blue-700 transition-colors duration-400 ease-out">/user per month</span>
                 </div>
                 
-                <button className={`w-full py-3 mb-8 px-6 rounded-full font-medium transition-colors ${plan.popular ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-gray-900 text-white hover:bg-gray-800'}`}>
+                <button className="w-full py-3 mb-8 px-6 rounded-full font-medium bg-gray-900 text-white hover:bg-blue-600 group-hover:bg-blue-600 transition-all duration-400 ease-out transform group-hover:scale-105">
                   {plan.name === 'Enterprise' ? 'Contact us' : 'Get started'}
                 </button>
               </div>
               
               <div>
-                <h4 className="font-semibold text-xl text-gray-900 mb-4">Free includes</h4>
+                <h4 className="font-semibold text-xl text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-400 ease-out">Free includes</h4>
                 <ul className="space-y-3">
                   {plan.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center text-gray-600">
+                    <li key={featureIndex} className="flex items-center text-gray-600 group-hover:text-gray-700 transition-colors duration-400 ease-out">
                       {feature.included ? (
-                        <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-5 h-5 text-green-500 mr-3 group-hover:text-green-600 transition-colors duration-400 ease-out" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                       ) : (
-                        <svg className="w-5 h-5 text-gray-300 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-5 h-5 text-gray-300 mr-3 transition-colors duration-400 ease-out" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                         </svg>
                       )}
-                      <span className={feature.included ? 'text-gray-600' : 'text-gray-400'}>
+                      <span className={feature.included ? 'text-gray-600 group-hover:text-gray-700 transition-colors duration-400 ease-out' : 'text-gray-400'}>
                         {feature.text}
                       </span>
                     </li>
@@ -490,7 +669,7 @@ const CTASection = ({ onDashboardClick }: { onDashboardClick: () => void }) => (
     }}>
 
       <div className="relative z-10 flex flex-col items-center justify-center text-center py-16 md:py-20 px-6 md:px-8">
-        <h2 className={`${typography.h2} text-white mb-6 md:mb-8 max-w-4xl`}>
+        <h2 className={`${typography.h2} text-white mb-6 md:mb-8 max-w-5xl`}>
           ShowOnAI와 함께,<br />
           제로 클릭 시대의 브랜드 자리를 먼저 선점하세요.
         </h2>
@@ -517,7 +696,7 @@ const Footer = () => (
         <p className="text-gray-500">Smart local AI-powered SEO Analysis</p>
       </div>
       
-      <div className="flex flex-wrap items-center gap-6 md:gap-8">
+      <div className="flex flex-wrap items-end gap-6 md:gap-8 md:self-end">
         <a href="#" className="text-gray-400 hover:text-gray-900 transition-colors font-medium">About</a>
         <a href="#pricing" className="text-gray-400 hover:text-gray-900 transition-colors font-medium">Pricing</a>
         <a href="#" className="text-gray-400 hover:text-gray-900 transition-colors font-medium">Docs</a>
@@ -531,6 +710,33 @@ function LandingPage() {
   const [email, setEmail] = useState('');
   const [isYearly, setIsYearly] = useState(true);
   const [expandedFaq, setExpandedFaq] = useState([1]);
+  const [showDemoDialog, setShowDemoDialog] = useState(false);
+  const [demoForm, setDemoForm] = useState({
+    name: '',
+    employees: '',
+    timeline: '',
+    agency: ''
+  });
+
+  useEffect(() => {
+    if (showDemoDialog) {
+      const scrollY = window.scrollY;
+      
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      
+      return () => {
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [showDemoDialog]);
 
   const handleEmailSubmit = () => {
     if (email) {
@@ -543,7 +749,11 @@ function LandingPage() {
   };
 
   const handleDashboardClick = () => {
-    window.location.href = '/dashboard';
+    setShowDemoDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setShowDemoDialog(false);
   };
 
   return (
@@ -554,12 +764,11 @@ function LandingPage() {
         <div 
           className="relative z-10 rounded-[24px] mx-4 overflow-hidden" 
           style={{ 
-            height: '1064px',
-            maxHeight: '100vh',
+            height: '120vh',
             minHeight: '600px',
             backgroundImage: 'url(/background.svg)', 
             backgroundSize: 'cover', 
-            backgroundPosition: 'center' 
+            backgroundPosition: 'top center' 
           }}
         >
           <Header 
@@ -591,6 +800,15 @@ function LandingPage() {
           font-family: var(--font-manrope), system-ui, sans-serif;
         }
       `}</style>
+
+      {showDemoDialog && (
+        <DemoDialog 
+          isOpen={showDemoDialog}
+          onClose={handleCloseDialog}
+          formData={demoForm}
+          setFormData={setDemoForm}
+        />
+      )}
     </div>
   );
 }
