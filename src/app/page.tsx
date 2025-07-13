@@ -202,34 +202,6 @@ const DemoDialog = ({ isOpen, onClose, formData, setFormData }: DemoDialogProps)
   );
 };
 
-const BackgroundElement = () => {
-  return (
-    <div className="relative w-full h-full">
-      <div className="absolute w-full h-full z-0">
-        <img src="/assets/Shapes.svg" alt="bg" className="absolute w-full top-0 right-0 object-cover" loading="lazy" />
-        <img src="/assets/Ellipses.svg" alt="bg" className="absolute w-full top-0 right-0 object-cover" loading="lazy" />
-        <img src="/assets/Lines.svg" alt="bg" className="absolute w-full object-cover translate-y-[140%]" loading="lazy" />
-        <img src="/assets/Lines-1.svg" alt="bg" className="absolute w-full object-cover translate-y-[190%]" loading="lazy" />
-        <img src="/assets/Lines-1.svg" alt="bg" className="absolute w-full object-cover translate-y-[240%]" loading="lazy" />
-        <img src="/assets/Element-3.svg" alt="bg" className="absolute w-full top-0 right-0 object-cover translate-y-[90%]" loading="lazy" />
-        <img src="/assets/Element-7.svg" alt="bg" className="absolute w-full top-0 right-0 object-cover translate-y-[110%]" loading="lazy" />
-        <img src="/assets/Element-8.svg" alt="bg" className="absolute w-full top-0 right-0 object-cover translate-y-[150%]" loading="lazy" />
-        <img src="/assets/Element-4.svg" alt="bg" className="absolute w-full top-0 left-0 object-cover translate-y-[100%]" loading="lazy" />
-        <img src="/assets/Element-8.svg" alt="bg" className="absolute w-full top-0 right-0 object-cover translate-y-[200%]" loading="lazy" />
-        <img src="/assets/Element-4.svg" alt="bg" className="absolute w-full top-0 left-0 object-cover translate-y-[150%]" loading="lazy" />
-        <img src="/assets/Element-2.svg" alt="bg" className="absolute w-full top-0 right-0 object-cover translate-y-[150%]" loading="lazy" />
-        <img src="/assets/Element-9.svg" alt="bg" className="absolute w-full top-0 left-0 object-cover translate-y-[170%]" loading="lazy" />
-        <img src="/assets/Element-10.svg" alt="bg" className="absolute w-full top-0 right-0 object-cover translate-y-[330%]" loading="lazy" />
-        <img src="/assets/Element-1.svg" alt="bg" className="absolute w-full top-0 right-0 object-cover translate-y-[190%]" loading="lazy" />
-        <img src="/assets/Element.svg" alt="bg" className="absolute w-full top-0 right-0 object-cover translate-y-[125%]" loading="lazy" /> {/* 180% */}
-        <img src="/assets/Pixels Mask-1.svg" alt="bg" className="absolute w-full object-cover translate-y-[210%]" loading="lazy" />
-        <img src="/assets/Pixels Mask-2.svg" alt="bg" className="absolute w-full object-cover translate-y-[290%]" loading="lazy" />
-        <img src="/assets/Pixels Mask.svg" alt="bg" className="absolute w-full object-cover translate-y-[280%]" loading="lazy" /> {/* 350% */}
-      </div>
-    </div>
-  );
-};
-
 const Header = ({ onLoginClick, onDashboardClick }: { onLoginClick: () => void, onDashboardClick: () => void }) => (
   <header className="relative z-50 px-3 sm:px-4 lg:px-8 pt-3 sm:pt-4 md:pt-6 lg:pt-12">
     <div className="max-w-7xl mx-auto flex justify-center">
@@ -794,10 +766,8 @@ function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-blue-50 font-manrope scroll-smooth flex flex-col">
-      <div className="relative flex-shrink-0">
-        <BackgroundElement />
-        
+    <div className="min-h-screen bg-blue-50 font-manrope scroll-smooth flex flex-col" style={{backgroundImage:'url(/landing-page.svg)', backgroundSize: 'cover', backgroundPosition: 'top center' }}>
+      <div className="relative flex-shrink-0">        
         <div 
           className="relative z-10 rounded-[24px] mx-4 mt-1 sm:mt-2 md:mt-3 lg:mt-4 overflow-hidden" 
           style={{ 
