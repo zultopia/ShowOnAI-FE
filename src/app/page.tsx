@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { DemoFormData, DemoDialogProps } from '@/types/dialog';
+import Image from 'next/image';
+import { DemoDialogProps } from '@/types/dialog';
 
 const typography = {
   h1: "font-manrope font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl leading-tight",
@@ -79,7 +80,7 @@ const DemoDialog = ({ isOpen, onClose, formData, setFormData }: DemoDialogProps)
       <div className="relative bg-white rounded-xl md:rounded-2xl lg:rounded-3xl p-4 sm:p-6 md:p-8 w-full max-w-sm sm:max-w-md md:max-w-4xl shadow-2xl border border-gray-100 transform transition-all duration-300 scale-100 max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
         <div className="mb-4 sm:mb-6">
           <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-blue-50 rounded-lg md:rounded-xl flex items-center justify-center mb-3 sm:mb-4">
-            <img src="/call-calling.svg" alt="Phone" className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
+            <Image src="/call-calling.svg" alt="Phone" width={24} height={24} className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
           </div>
           
           <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 leading-tight">
@@ -207,7 +208,7 @@ const Header = ({ onLoginClick, onDashboardClick }: { onLoginClick: () => void, 
     <div className="max-w-7xl mx-auto flex justify-center">
       <nav className="flex items-center justify-between w-full max-w-5xl h-9 sm:h-10 md:h-12 lg:h-15 px-2 sm:px-3 md:px-4 lg:px-6 py-1.5 sm:py-2 rounded-full border border-white/60 bg-white/30 backdrop-blur-lg">
         <div className="flex items-center">
-          <img src="/showonai-white.svg" alt="ShowOnAI" className="h-5 sm:h-6 md:h-8 lg:h-11" />
+          <Image src="/showonai-white.svg" alt="ShowOnAI" width={176} height={44} className="h-5 sm:h-6 md:h-8 lg:h-11 w-auto" />
         </div>
 
         <div className="hidden lg:flex items-center space-x-8">
@@ -291,10 +292,12 @@ const CompanyLogos = () => {
     <section className="relative py-6 sm:py-8 md:py-12 lg:py-20 overflow-hidden">
       <div className="flex items-center space-x-6 sm:space-x-8 md:space-x-12 lg:space-x-24 animate-scroll-rtl">
         {[...logos, ...logos].map((logo, index) => (
-          <img 
+          <Image 
             key={index}
             src={logo.src} 
             alt={logo.alt} 
+            width={120}
+            height={40}
             className="h-3 sm:h-4 md:h-6 lg:h-10 w-auto opacity-70 hover:opacity-100 transition-opacity flex-shrink-0" 
           />
         ))}
@@ -321,7 +324,7 @@ const QuoteSection = () => (
       <div className="text-right mb-12 md:mb-24">
         <div className="max-w-4xl ml-auto">
           <h2 className={`${typography.h2} text-gray-800 text-right mb-6`}>
-            "2028년, 기존 검색 트래픽의 50%가 생성형 AI 검색으로 대체됩니다."
+            &ldquo;2028년, 기존 검색 트래픽의 50%가 생성형 AI 검색으로 대체됩니다.&rdquo;
           </h2>
           <p className="text-gray-500 text-right text-lg md:text-xl font-medium">
             —Gartner
@@ -345,7 +348,7 @@ const FeaturesSection = () => {
   const features = [
     {
       icon: (
-        <img src="/assets/Icon-1.svg" alt="Diagnosis" className="w-16 h-16" />
+        <Image src="/assets/Icon-1.svg" alt="Diagnosis" width={64} height={64} className="w-16 h-16" />
       ),
       title: "진단 Diagnosis",
       description: "생성형 AI에서 브랜드 노출 현황을 정확히 진단하고 개선점을 찾아드립니다.",
@@ -355,7 +358,7 @@ const FeaturesSection = () => {
     },
     {
       icon: (
-        <img src="/assets/Icon-2.svg" alt="Prescription" className="w-16 h-16" />
+        <Image src="/assets/Icon-2.svg" alt="Prescription" width={64} height={64} className="w-16 h-16" />
       ),
       title: "차단 Prescription",
       description: "검색 엔진 변화에 선제적으로 대응하여 브랜드 가시성을 보호합니다.",
@@ -365,7 +368,7 @@ const FeaturesSection = () => {
     },
     {
       icon: (
-        <img src="/assets/Icon-3.svg" alt="Tracking" className="w-16 h-16" />
+        <Image src="/assets/Icon-3.svg" alt="Tracking" width={64} height={64} className="w-16 h-16" />
       ),
       title: "추적 Tracking",
       description: "실시간 모니터링으로 SEO 성과를 추적하고 지속적으로 최적화합니다.",
@@ -660,7 +663,7 @@ const CTASection = ({ onDashboardClick }: { onDashboardClick: () => void }) => (
           className="inline-flex items-center gap-1.5 sm:gap-2 bg-black text-white px-3 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-2.5 md:py-3 lg:py-4 rounded-lg sm:rounded-xl md:rounded-[20px] font-medium text-xs sm:text-sm md:text-base hover:bg-gray-800 transition-colors shadow-lg active:scale-95"
         >
           데모 요청
-          <img src="/chat.svg" alt="Chat" className="w-3 h-3 sm:w-3 sm:h-3 md:w-4 md:h-4" />
+          <Image src="/chat.svg" alt="Chat" width={16} height={16} className="w-3 h-3 sm:w-3 sm:h-3 md:w-4 md:h-4" />
         </button>
       </div>
     </div>
@@ -672,10 +675,12 @@ const Footer = () => (
     <div className="max-w-7xl mx-auto">
       <div className="flex flex-col space-y-6 sm:space-y-8 md:space-y-0 md:flex-row md:items-center md:justify-between">
         <div className="flex flex-col items-start gap-2 sm:gap-3">
-          <img 
+          <Image 
             src="/showonai.svg" 
             alt="ShowOnAI" 
-            className="h-6 sm:h-8 md:h-10 lg:h-12" 
+            width={176} 
+            height={48}
+            className="h-6 sm:h-8 md:h-10 lg:h-12 w-auto" 
           />
           <p className="text-gray-500 text-sm sm:text-sm md:text-base max-w-xs">
             Smart local AI-powered SEO Analysis

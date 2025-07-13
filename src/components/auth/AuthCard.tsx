@@ -1,4 +1,5 @@
 import type React from "react";
+import Image from "next/image";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 interface AuthCardProps {
@@ -12,7 +13,7 @@ export function AuthCard({ children, title, subtitle }: AuthCardProps) {
     <Card className="w-full max-w-2xl mx-auto px-4 py-12 bg-white backdrop-blur-sm border-0 rounded-3xl shadow-xl">
       <CardHeader className="text-start space-y-4 pb-6">
         <div className="w-16 h-16 bg-primary-blue-100 rounded-2xl flex items-center justify-center">
-          <img src="/login.svg" alt="Login" />
+          <Image src="/login.svg" alt="Login" width={32} height={32} />
         </div>
 
         <div className="space-y-2">

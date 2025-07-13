@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/Button"
 
 export function Header() {
@@ -6,9 +7,11 @@ export function Header() {
     <header className="w-full px-4 py-4 md:px-6 lg:px-8 bg-white">
       <div className="flex items-center justify-between max-w-7xl mx-auto">
         <Link href="/" className="flex items-center gap-2">
-          <img
+          <Image
             src="/showonai.svg"
             alt="ShowOnAI Logo"
+            width={176}
+            height={32}
             className="h-8 w-auto"
           />
         </Link>

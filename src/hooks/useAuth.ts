@@ -3,7 +3,16 @@ import { useRouter } from 'next/navigation';
 import { authAPI } from '@/lib/api';
 import { isValidUUID } from '@/lib/utils';
 import { useLocalStorage } from './useLocalStorage';
-import type { User, AuthState, RegisterRequest, LoginRequest } from '@/types/auth';
+import type { User, RegisterRequest, LoginRequest } from '@/types/auth';
+
+interface ErrorResponse {
+  response?: {
+    data?: {
+      code?: string;
+      message?: string;
+    };
+  };
+}
 
 export function useAuth() {
   const router = useRouter();
@@ -37,8 +46,9 @@ export function useAuth() {
         } else {
           throw new Error('Invalid user data received');
         }
-      } catch (err: any) {
-        const errorCode = err.response?.data?.code;
+      } catch (err) {
+        const error = err as ErrorResponse;
+        const errorCode = error.response?.data?.code;
         
         if (errorCode === 'NO_REFRESH_TOKEN' || errorCode === 'INVALID_REFRESH_TOKEN') {
           setUser(null);
@@ -55,7 +65,7 @@ export function useAuth() {
 
     const interval = setInterval(checkSession, 10000);
     return () => clearInterval(interval);
-  }, [user, setStoredUser]);
+  }, [user, setStoredUser, router]);
 
   const register = useCallback(async (data: RegisterRequest): Promise<boolean> => {
     setLoading(true);
@@ -73,9 +83,10 @@ export function useAuth() {
         setError(response.message || 'Registration failed - invalid response');
         return false;
       }
-    } catch (err: any) {
-      const errorMessage = err.response?.data?.message || 'Registration failed';
-      const errorCode = err.response?.data?.code;
+    } catch (err) {
+      const error = err as ErrorResponse;
+      const errorMessage = error.response?.data?.message || 'Registration failed';
+      const errorCode = error.response?.data?.code;
       
       if (errorCode === 'registration_failed') {
         setError('Registration failed');
@@ -107,9 +118,10 @@ export function useAuth() {
         setError(response.message || 'Login failed - invalid response');
         return false;
       }
-    } catch (err: any) {
-      const errorMessage = err.response?.data?.message || 'Login failed';
-      const errorCode = err.response?.data?.code;
+    } catch (err) {
+      const error = err as ErrorResponse;
+      const errorMessage = error.response?.data?.message || 'Login failed';
+      const errorCode = error.response?.data?.code;
       if (errorCode === 'authentication_failed') {
         setError('Invalid email or password');
       } else {
@@ -130,7 +142,7 @@ export function useAuth() {
     
     try {
       await authAPI.logout();
-    } catch (err: any) {
+    } catch (err) {
       console.error('Logout error:', err);
     } finally {
       setUser(null);
