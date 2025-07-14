@@ -43,113 +43,123 @@ const typography = {
   price: "font-manrope font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl",
 } as const;
 
-const CompanyLogosPlaceholder = memo(() => (
-  <section className="relative py-12 sm:py-8 md:py-12 lg:py-20 overflow-hidden">
-    <div className="flex items-center space-x-6 sm:space-x-8 md:space-x-12 lg:space-x-24">
-      {Array.from({ length: 7 }).map((_, index) => (
-        <div key={index} className="h-3 sm:h-4 md:h-6 lg:h-10 w-20 bg-gray-200 animate-pulse rounded flex-shrink-0" />
-      ))}
-    </div>
-  </section>
-));
+const CompanyLogosPlaceholder = memo(function CompanyLogosPlaceholder() {
+  return (
+    <section className="relative py-12 sm:py-8 md:py-12 lg:py-20 overflow-hidden">
+      <div className="flex items-center space-x-6 sm:space-x-8 md:space-x-12 lg:space-x-24">
+        {Array.from({ length: 7 }).map((_, index) => (
+          <div key={index} className="h-3 sm:h-4 md:h-6 lg:h-10 w-20 bg-gray-200 animate-pulse rounded flex-shrink-0" />
+        ))}
+      </div>
+    </section>
+  );
+});
 
-const QuoteSectionPlaceholder = memo(() => (
-  <section className="relative py-12 md:py-24 px-4 sm:px-6 lg:px-8">
-    <div className="max-w-5/6 mx-auto">
-      <div className="text-right mb-12 md:mb-24">
-        <div className="max-w-4xl ml-auto space-y-4">
-          <div className="h-8 bg-gray-200 animate-pulse rounded w-3/4 ml-auto" />
-          <div className="h-8 bg-gray-200 animate-pulse rounded w-1/2 ml-auto" />
-          <div className="h-6 bg-gray-200 animate-pulse rounded w-1/4 ml-auto" />
+const QuoteSectionPlaceholder = memo(function QuoteSectionPlaceholder() {
+  return (
+    <section className="relative py-12 md:py-24 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5/6 mx-auto">
+        <div className="text-right mb-12 md:mb-24">
+          <div className="max-w-4xl ml-auto space-y-4">
+            <div className="h-8 bg-gray-200 animate-pulse rounded w-3/4 ml-auto" />
+            <div className="h-8 bg-gray-200 animate-pulse rounded w-1/2 ml-auto" />
+            <div className="h-6 bg-gray-200 animate-pulse rounded w-1/4 ml-auto" />
+          </div>
+        </div>
+        <div className="text-left space-y-4">
+          <div className="h-8 bg-gray-200 animate-pulse rounded w-1/3" />
+          <div className="h-8 bg-blue-200 animate-pulse rounded w-1/2" />
         </div>
       </div>
-      <div className="text-left space-y-4">
-        <div className="h-8 bg-gray-200 animate-pulse rounded w-1/3" />
-        <div className="h-8 bg-blue-200 animate-pulse rounded w-1/2" />
-      </div>
-    </div>
-  </section>
-));
+    </section>
+  );
+});
 
-const FeaturesSectionPlaceholder = memo(() => (
-  <section className="relative py-12 md:py-24 px-4 sm:px-6 lg:px-8">
-    <div className="max-w-5/6 mx-auto">
-      <div className="text-center mb-16 md:mb-24 space-y-4">
-        <div className="h-4 bg-blue-200 animate-pulse rounded w-24 mx-auto" />
-        <div className="h-10 bg-gray-200 animate-pulse rounded w-1/2 mx-auto" />
-        <div className="h-6 bg-gray-200 animate-pulse rounded w-3/4 mx-auto" />
+const FeaturesSectionPlaceholder = memo(function FeaturesSectionPlaceholder() {
+  return (
+    <section className="relative py-12 md:py-24 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5/6 mx-auto">
+        <div className="text-center mb-16 md:mb-24 space-y-4">
+          <div className="h-4 bg-blue-200 animate-pulse rounded w-24 mx-auto" />
+          <div className="h-10 bg-gray-200 animate-pulse rounded w-1/2 mx-auto" />
+          <div className="h-6 bg-gray-200 animate-pulse rounded w-3/4 mx-auto" />
+        </div>
+        <div className="space-y-16 md:space-y-24">
+          {Array.from({ length: 3 }).map((_, index) => (
+            <div key={index} className="flex flex-col lg:flex-row items-center gap-8 md:gap-16">
+              <div className="flex-1 space-y-4">
+                <div className="w-16 h-16 bg-gray-200 animate-pulse rounded" />
+                <div className="h-8 bg-gray-200 animate-pulse rounded w-1/2" />
+                <div className="h-6 bg-gray-200 animate-pulse rounded w-3/4" />
+                <div className="space-y-2">
+                  <div className="h-4 bg-gray-200 animate-pulse rounded" />
+                  <div className="h-4 bg-gray-200 animate-pulse rounded w-5/6" />
+                </div>
+              </div>
+              <div className="flex-1">
+                <div className="w-full h-[400px] md:h-[500px] bg-gray-200 animate-pulse rounded-2xl" />
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="space-y-16 md:space-y-24">
-        {Array.from({ length: 3 }).map((_, index) => (
-          <div key={index} className="flex flex-col lg:flex-row items-center gap-8 md:gap-16">
-            <div className="flex-1 space-y-4">
-              <div className="w-16 h-16 bg-gray-200 animate-pulse rounded" />
-              <div className="h-8 bg-gray-200 animate-pulse rounded w-1/2" />
-              <div className="h-6 bg-gray-200 animate-pulse rounded w-3/4" />
-              <div className="space-y-2">
+    </section>
+  );
+});
+
+const PricingSectionPlaceholder = memo(function PricingSectionPlaceholder() {
+  return (
+    <section className="relative py-6 sm:py-8 md:py-12 lg:py-24 px-3 sm:px-4 lg:px-8">
+      <div className="w-full mx-auto">
+        <div className="text-center mb-6 sm:mb-8 md:mb-12 lg:mb-16 space-y-4">
+          <div className="h-4 bg-blue-200 animate-pulse rounded w-20 mx-auto" />
+          <div className="h-10 bg-gray-200 animate-pulse rounded w-1/3 mx-auto" />
+          <div className="h-6 bg-gray-200 animate-pulse rounded w-1/2 mx-auto" />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8 max-w-6xl mx-auto">
+          {Array.from({ length: 3 }).map((_, index) => (
+            <div key={index} className="bg-white rounded-lg sm:rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 shadow-lg border border-gray-200">
+              <div className="space-y-4">
+                <div className="h-8 bg-gray-200 animate-pulse rounded w-1/2" />
                 <div className="h-4 bg-gray-200 animate-pulse rounded" />
-                <div className="h-4 bg-gray-200 animate-pulse rounded w-5/6" />
+                <div className="h-12 bg-gray-200 animate-pulse rounded w-1/3" />
+                <div className="h-10 bg-gray-200 animate-pulse rounded" />
+                <div className="space-y-2">
+                  {Array.from({ length: 6 }).map((_, i) => (
+                    <div key={i} className="h-4 bg-gray-200 animate-pulse rounded" />
+                  ))}
+                </div>
               </div>
             </div>
-            <div className="flex-1">
-              <div className="w-full h-[400px] md:h-[500px] bg-gray-200 animate-pulse rounded-2xl" />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+});
+
+const FAQSectionPlaceholder = memo(function FAQSectionPlaceholder() {
+  return (
+    <section className="relative py-6 sm:py-8 md:py-12 lg:py-24 px-3 sm:px-4 lg:px-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-6 sm:mb-8 md:mb-12 lg:mb-16 space-y-4">
+          <div className="h-4 bg-blue-200 animate-pulse rounded w-32 mx-auto" />
+          <div className="h-10 bg-gray-200 animate-pulse rounded w-1/3 mx-auto" />
+          <div className="h-6 bg-gray-200 animate-pulse rounded w-1/2 mx-auto" />
+        </div>
+        <div className="bg-white rounded-lg sm:rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+          {Array.from({ length: 5 }).map((_, index) => (
+            <div key={index} className={`p-4 ${index < 4 ? 'border-b border-gray-200' : ''}`}>
+              <div className="h-6 bg-gray-200 animate-pulse rounded w-3/4" />
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
-));
+    </section>
+  );
+});
 
-const PricingSectionPlaceholder = memo(() => (
-  <section className="relative py-6 sm:py-8 md:py-12 lg:py-24 px-3 sm:px-4 lg:px-8">
-    <div className="w-full mx-auto">
-      <div className="text-center mb-6 sm:mb-8 md:mb-12 lg:mb-16 space-y-4">
-        <div className="h-4 bg-blue-200 animate-pulse rounded w-20 mx-auto" />
-        <div className="h-10 bg-gray-200 animate-pulse rounded w-1/3 mx-auto" />
-        <div className="h-6 bg-gray-200 animate-pulse rounded w-1/2 mx-auto" />
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8 max-w-6xl mx-auto">
-        {Array.from({ length: 3 }).map((_, index) => (
-          <div key={index} className="bg-white rounded-lg sm:rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 shadow-lg border border-gray-200">
-            <div className="space-y-4">
-              <div className="h-8 bg-gray-200 animate-pulse rounded w-1/2" />
-              <div className="h-4 bg-gray-200 animate-pulse rounded" />
-              <div className="h-12 bg-gray-200 animate-pulse rounded w-1/3" />
-              <div className="h-10 bg-gray-200 animate-pulse rounded" />
-              <div className="space-y-2">
-                {Array.from({ length: 6 }).map((_, i) => (
-                  <div key={i} className="h-4 bg-gray-200 animate-pulse rounded" />
-                ))}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-));
-
-const FAQSectionPlaceholder = memo(() => (
-  <section className="relative py-6 sm:py-8 md:py-12 lg:py-24 px-3 sm:px-4 lg:px-8">
-    <div className="max-w-6xl mx-auto">
-      <div className="text-center mb-6 sm:mb-8 md:mb-12 lg:mb-16 space-y-4">
-        <div className="h-4 bg-blue-200 animate-pulse rounded w-32 mx-auto" />
-        <div className="h-10 bg-gray-200 animate-pulse rounded w-1/3 mx-auto" />
-        <div className="h-6 bg-gray-200 animate-pulse rounded w-1/2 mx-auto" />
-      </div>
-      <div className="bg-white rounded-lg sm:rounded-xl border border-gray-200 overflow-hidden shadow-sm">
-        {Array.from({ length: 5 }).map((_, index) => (
-          <div key={index} className={`p-4 ${index < 4 ? 'border-b border-gray-200' : ''}`}>
-            <div className="h-6 bg-gray-200 animate-pulse rounded w-3/4" />
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-));
-
-const DemoDialog = memo(({ isOpen, onClose, formData, setFormData }: DemoDialogProps) => {
+const DemoDialog = memo(function DemoDialog({ isOpen, onClose, formData, setFormData }: DemoDialogProps) {
   const employeeOptions = useMemo(() => [
     "1-10 employees",
     "11-50 employees", 
@@ -194,7 +204,7 @@ const DemoDialog = memo(({ isOpen, onClose, formData, setFormData }: DemoDialogP
 
   const handleInputChange = useCallback((field: keyof DemoFormData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
-  }, []);
+  }, [setFormData]);
 
   if (!isOpen) return null;
 
@@ -343,47 +353,49 @@ const DemoDialog = memo(({ isOpen, onClose, formData, setFormData }: DemoDialogP
   );
 });
 
-const Header = memo(({ onLoginClick, onDashboardClick }: HeaderProps) => (
-  <header className="relative z-50 px-3 sm:px-4 lg:px-8 pt-3 sm:pt-4 md:pt-6 lg:pt-12">
-    <div className="max-w-7xl mx-auto flex justify-center">
-      <nav className="flex items-center justify-between w-full max-w-5xl h-9 sm:h-10 md:h-12 lg:h-15 px-2 sm:px-3 md:px-4 lg:px-6 py-1.5 sm:py-2 rounded-full border border-white/60 bg-white/30 backdrop-blur-lg">
-        <div className="flex items-center">
-          <Image 
-            src="/showonai-white.svg" 
-            alt="ShowOnAI" 
-            width={176} 
-            height={44} 
-            className="h-5 sm:h-6 md:h-8 lg:h-11 w-auto"
-            priority
-          />
-        </div>
+const Header = memo(function Header({ onLoginClick, onDashboardClick }: HeaderProps) {
+  return (
+    <header className="relative z-50 px-3 sm:px-4 lg:px-8 pt-3 sm:pt-4 md:pt-6 lg:pt-12">
+      <div className="max-w-7xl mx-auto flex justify-center">
+        <nav className="flex items-center justify-between w-full max-w-5xl h-9 sm:h-10 md:h-12 lg:h-15 px-2 sm:px-3 md:px-4 lg:px-6 py-1.5 sm:py-2 rounded-full border border-white/60 bg-white/30 backdrop-blur-lg">
+          <div className="flex items-center">
+            <Image 
+              src="/showonai-white.svg" 
+              alt="ShowOnAI" 
+              width={176} 
+              height={44} 
+              className="h-5 sm:h-6 md:h-8 lg:h-11 w-auto"
+              priority
+            />
+          </div>
 
-        <div className="hidden lg:flex items-center space-x-8">
-          <a href="#features" className="text-white/90 hover:text-white transition-colors font-medium">기능</a>
-          <a href="#pricing" className="text-white/90 hover:text-white transition-colors font-medium">가격정책</a>
-          <a href="#" className="text-white/90 hover:text-white transition-colors font-medium">블로그</a>
-        </div>
+          <div className="hidden lg:flex items-center space-x-8">
+            <a href="#features" className="text-white/90 hover:text-white transition-colors font-medium">기능</a>
+            <a href="#pricing" className="text-white/90 hover:text-white transition-colors font-medium">가격정책</a>
+            <a href="#" className="text-white/90 hover:text-white transition-colors font-medium">블로그</a>
+          </div>
 
-        <div className="flex items-center space-x-1 sm:space-x-2">
-          <button
-            onClick={onDashboardClick}
-            className="px-1.5 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-2 rounded-full bg-white text-blue-600 font-semibold text-xs sm:text-xs md:text-sm lg:text-base hover:bg-gray-50 transition-colors active:scale-95 whitespace-nowrap"
-          >
-            데모 요청
-          </button>
-          <button
-            onClick={onLoginClick}
-            className="px-1.5 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-2 rounded-full bg-blue-600 text-white font-semibold text-xs sm:text-xs md:text-sm lg:text-base hover:bg-blue-700 transition-colors active:scale-95"
-          >
-            로그인
-          </button>
-        </div>
-      </nav>
-    </div>
-  </header>
-));
+          <div className="flex items-center space-x-1 sm:space-x-2">
+            <button
+              onClick={onDashboardClick}
+              className="px-1.5 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-2 rounded-full bg-white text-blue-600 font-semibold text-xs sm:text-xs md:text-sm lg:text-base hover:bg-gray-50 transition-colors active:scale-95 whitespace-nowrap"
+            >
+              데모 요청
+            </button>
+            <button
+              onClick={onLoginClick}
+              className="px-1.5 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-2 rounded-full bg-blue-600 text-white font-semibold text-xs sm:text-xs md:text-sm lg:text-base hover:bg-blue-700 transition-colors active:scale-95"
+            >
+              로그인
+            </button>
+          </div>
+        </nav>
+      </div>
+    </header>
+  );
+});
 
-const HeroSection = memo(({ email, setEmail, onEmailSubmit }: HeroSectionProps) => {
+const HeroSection = memo(function HeroSection({ email, setEmail, onEmailSubmit }: HeroSectionProps) {
   const handleEmailChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   }, [setEmail]);
@@ -454,88 +466,92 @@ const HeroSection = memo(({ email, setEmail, onEmailSubmit }: HeroSectionProps) 
   );
 });
 
-const CTASection = memo(({ onDashboardClick }: CTASectionProps) => (
-  <section className="relative px-3 sm:px-4 lg:px-8 pt-3 sm:pt-4 md:pt-8 lg:pt-12">
-    <div className="relative rounded-t-xl sm:rounded-t-2xl md:rounded-t-3xl overflow-hidden flex items-center justify-center min-h-[250px] sm:min-h-[300px] md:min-h-[400px]" style={{
-      backgroundImage: 'url(/above-footer.svg)',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center'
-    }}>
-      <div className="relative z-10 flex flex-col items-center justify-center text-center py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8">
-        <h2 className={`${typography.h2} text-white mb-4 sm:mb-6 md:mb-8 max-w-4xl px-2`}>
-          ShowOnAI와 함께,<br />
-          제로 클릭 시대의 브랜드 자리를 먼저 선점하세요.
-        </h2>
-        
-        <button 
-          onClick={onDashboardClick}
-          className="inline-flex items-center gap-1.5 sm:gap-2 bg-black text-white px-3 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-2.5 md:py-3 lg:py-4 rounded-lg sm:rounded-xl md:rounded-[20px] font-medium text-xs sm:text-sm md:text-base hover:bg-gray-800 transition-colors shadow-lg active:scale-95"
-        >
-          데모 요청
-          <Image 
-            src="/chat.svg" 
-            alt="Chat" 
-            width={16} 
-            height={16} 
-            className="w-3 h-3 sm:w-3 sm:h-3 md:w-4 md:h-4"
-            loading="lazy"
-          />
-        </button>
+const CTASection = memo(function CTASection({ onDashboardClick }: CTASectionProps) {
+  return (
+    <section className="relative px-3 sm:px-4 lg:px-8 pt-3 sm:pt-4 md:pt-8 lg:pt-12">
+      <div className="relative rounded-t-xl sm:rounded-t-2xl md:rounded-t-3xl overflow-hidden flex items-center justify-center min-h-[250px] sm:min-h-[300px] md:min-h-[400px]" style={{
+        backgroundImage: 'url(/above-footer.svg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}>
+        <div className="relative z-10 flex flex-col items-center justify-center text-center py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8">
+          <h2 className={`${typography.h2} text-white mb-4 sm:mb-6 md:mb-8 max-w-4xl px-2`}>
+            ShowOnAI와 함께,<br />
+            제로 클릭 시대의 브랜드 자리를 먼저 선점하세요.
+          </h2>
+          
+          <button 
+            onClick={onDashboardClick}
+            className="inline-flex items-center gap-1.5 sm:gap-2 bg-black text-white px-3 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-2.5 md:py-3 lg:py-4 rounded-lg sm:rounded-xl md:rounded-[20px] font-medium text-xs sm:text-sm md:text-base hover:bg-gray-800 transition-colors shadow-lg active:scale-95"
+          >
+            데모 요청
+            <Image 
+              src="/chat.svg" 
+              alt="Chat" 
+              width={16} 
+              height={16} 
+              className="w-3 h-3 sm:w-3 sm:h-3 md:w-4 md:h-4"
+              loading="lazy"
+            />
+          </button>
+        </div>
       </div>
-    </div>
-  </section>
-));
+    </section>
+  );
+});
 
-const Footer = memo(() => (
-  <footer className="relative px-4 sm:px-6 lg:px-8 py-8 sm:py-10 md:py-12 lg:py-16 bg-white">
-    <div className="max-w-7xl mx-auto">
-      <div className="flex flex-col space-y-6 sm:space-y-8 md:space-y-0 md:flex-row md:items-center md:justify-between">
-        <div className="flex flex-col items-start gap-2 sm:gap-3">
-          <Image 
-            src="/showonai.svg" 
-            alt="ShowOnAI" 
-            width={176} 
-            height={48}
-            className="h-6 sm:h-8 md:h-10 lg:h-12 w-auto"
-            loading="lazy"
-          />
-          <p className="text-gray-500 text-sm sm:text-sm md:text-base max-w-xs">
-            Smart local AI-powered SEO Analysis
-          </p>
-        </div>
-        
-        <div className="flex flex-wrap items-end gap-4 sm:gap-6 md:gap-8 md:self-end">
-          <nav className="flex flex-wrap items-center gap-4 sm:gap-6 md:gap-8">
-            <a 
-              href="#" 
-              className="text-gray-400 hover:text-gray-900 transition-colors font-medium text-sm md:text-base py-2 sm:py-1 hover:underline focus:outline-none focus:underline"
-            >
-              About
-            </a>
-            <a 
-              href="#pricing" 
-              className="text-gray-400 hover:text-gray-900 transition-colors font-medium text-sm md:text-base py-2 sm:py-1 hover:underline focus:outline-none focus:underline"
-            >
-              Pricing
-            </a>
-            <a 
-              href="#" 
-              className="text-gray-400 hover:text-gray-900 transition-colors font-medium text-sm md:text-base py-2 sm:py-1 hover:underline focus:outline-none focus:underline"
-            >
-              Docs
-            </a>
-            <a 
-              href="#" 
-              className="text-gray-400 hover:text-gray-900 transition-colors font-medium text-sm md:text-base py-2 sm:py-1 hover:underline focus:outline-none focus:underline"
-            >
-              Blog
-            </a>
-          </nav>
+const Footer = memo(function Footer() {
+  return (
+    <footer className="relative px-4 sm:px-6 lg:px-8 py-8 sm:py-10 md:py-12 lg:py-16 bg-white">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col space-y-6 sm:space-y-8 md:space-y-0 md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-col items-start gap-2 sm:gap-3">
+            <Image 
+              src="/showonai.svg" 
+              alt="ShowOnAI" 
+              width={176} 
+              height={48}
+              className="h-6 sm:h-8 md:h-10 lg:h-12 w-auto"
+              loading="lazy"
+            />
+            <p className="text-gray-500 text-sm sm:text-sm md:text-base max-w-xs">
+              Smart local AI-powered SEO Analysis
+            </p>
+          </div>
+          
+          <div className="flex flex-wrap items-end gap-4 sm:gap-6 md:gap-8 md:self-end">
+            <nav className="flex flex-wrap items-center gap-4 sm:gap-6 md:gap-8">
+              <a 
+                href="#" 
+                className="text-gray-400 hover:text-gray-900 transition-colors font-medium text-sm md:text-base py-2 sm:py-1 hover:underline focus:outline-none focus:underline"
+              >
+                About
+              </a>
+              <a 
+                href="#pricing" 
+                className="text-gray-400 hover:text-gray-900 transition-colors font-medium text-sm md:text-base py-2 sm:py-1 hover:underline focus:outline-none focus:underline"
+              >
+                Pricing
+              </a>
+              <a 
+                href="#" 
+                className="text-gray-400 hover:text-gray-900 transition-colors font-medium text-sm md:text-base py-2 sm:py-1 hover:underline focus:outline-none focus:underline"
+              >
+                Docs
+              </a>
+              <a 
+                href="#" 
+                className="text-gray-400 hover:text-gray-900 transition-colors font-medium text-sm md:text-base py-2 sm:py-1 hover:underline focus:outline-none focus:underline"
+              >
+                Blog
+              </a>
+            </nav>
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
-));
+    </footer>
+  );
+});
 
 function LandingPage() {
   const [email, setEmail] = useState<string>('');
@@ -565,6 +581,14 @@ function LandingPage() {
 
   const handleCloseDialog = useCallback(() => {
     setShowDemoDialog(false);
+  }, []);
+
+  const handleSetDemoForm = useCallback((value: DemoFormData | ((prev: DemoFormData) => DemoFormData)) => {
+    if (typeof value === 'function') {
+      setDemoForm(value);
+    } else {
+      setDemoForm(value);
+    }
   }, []);
 
   useEffect(() => {
@@ -672,7 +696,7 @@ function LandingPage() {
           isOpen={showDemoDialog}
           onClose={handleCloseDialog}
           formData={demoForm}
-          setFormData={setDemoForm}
+          setFormData={handleSetDemoForm}
         />
       )}
     </div>

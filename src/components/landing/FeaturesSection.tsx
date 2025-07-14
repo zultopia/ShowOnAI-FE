@@ -11,7 +11,7 @@ const typography = {
   caption: "font-manrope font-medium text-xs sm:text-sm uppercase tracking-wider",
 } as const;
 
-export const FeaturesSection = memo(() => {
+export const FeaturesSection = memo(function FeaturesSection() {
   const features = useMemo(() => [
     {
       icon: (

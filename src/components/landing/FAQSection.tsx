@@ -12,7 +12,7 @@ interface FAQSectionProps {
   setExpandedFaq: (expandedFaq: number[]) => void;
 }
 
-export const FAQSection = memo(({ expandedFaq, setExpandedFaq }: FAQSectionProps) => {
+export const FAQSection = memo<FAQSectionProps>(function FAQSection({ expandedFaq, setExpandedFaq }) {
   const faqs = useMemo(() => [
     {
       question: "Dropdown Closed",

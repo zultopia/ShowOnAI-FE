@@ -15,7 +15,7 @@ interface PricingSectionProps {
   setIsYearly: (isYearly: boolean) => void;
 }
 
-export const PricingSection = memo(({ isYearly, setIsYearly }: PricingSectionProps) => {
+export const PricingSection = memo<PricingSectionProps>(function PricingSection({ isYearly, setIsYearly }) {
   const plans = useMemo(() => [
     {
       name: "Lite",
