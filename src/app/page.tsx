@@ -106,7 +106,7 @@ const DemoDialog = ({ isOpen, onClose, formData, setFormData }: DemoDialogProps)
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => 
                 setFormData({...formData, name: e.target.value})
               }
-              placeholder="Enter your full name"
+              placeholder="Enter Your Name"
               className="w-full px-3 py-2.5 sm:px-3 sm:py-3 md:px-4 md:py-4 bg-gray-50 border-0 rounded-lg text-gray-700 text-xs sm:text-sm outline-none transition-all focus:bg-white focus:shadow-lg focus:ring-2 focus:ring-blue-500/20 placeholder-gray-400"
             />
           </div>
@@ -123,7 +123,7 @@ const DemoDialog = ({ isOpen, onClose, formData, setFormData }: DemoDialogProps)
                 }
                 className="w-full px-3 py-2.5 sm:px-3 sm:py-3 md:px-4 md:py-4 bg-gray-50 border-0 rounded-lg text-gray-700 text-xs sm:text-sm outline-none appearance-none transition-all focus:bg-white focus:shadow-lg focus:ring-2 focus:ring-blue-500/20 cursor-pointer hover:bg-gray-100"
               >
-                <option value="" disabled className="text-gray-400">Select company size</option>
+                <option value="" disabled className="text-gray-400">Select Number of Employees Category</option>
                 {employeeOptions.map((option, index) => (
                   <option key={index} value={option} className="text-gray-700 py-2">{option}</option>
                 ))}
@@ -148,7 +148,7 @@ const DemoDialog = ({ isOpen, onClose, formData, setFormData }: DemoDialogProps)
                 }
                 className="w-full px-3 py-2.5 sm:px-3 sm:py-3 md:px-4 md:py-4 bg-gray-50 border-0 rounded-lg text-gray-700 text-xs sm:text-sm outline-none appearance-none transition-all focus:bg-white focus:shadow-lg focus:ring-2 focus:ring-blue-500/20 cursor-pointer hover:bg-gray-100"
               >
-                <option value="" disabled className="text-gray-400">Select timeline</option>
+                <option value="" disabled className="text-gray-400">Select Timeline for Investing in GEO Strategy</option>
                 {timelineOptions.map((option, index) => (
                   <option key={index} value={option} className="text-gray-700 py-2">{option}</option>
                 ))}
@@ -162,26 +162,45 @@ const DemoDialog = ({ isOpen, onClose, formData, setFormData }: DemoDialogProps)
           </div>
 
           <div>
-            <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
-              Agency
-            </label>
-            <div className="relative">
-              <select
-                value={formData.agency}
-                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => 
-                  setFormData({...formData, agency: e.target.value})
-                }
-                className="w-full px-3 py-2.5 sm:px-3 sm:py-3 md:px-4 md:py-4 bg-gray-50 border-0 rounded-lg text-gray-700 text-xs sm:text-sm outline-none appearance-none transition-all focus:bg-white focus:shadow-lg focus:ring-2 focus:ring-blue-500/20 cursor-pointer hover:bg-gray-100"
-              >
-                <option value="" disabled className="text-gray-400">Select agency type</option>
-                {agencyOptions.map((option, index) => (
-                  <option key={index} value={option} className="text-gray-700 py-2">{option}</option>
-                ))}
-              </select>
-              <div className="absolute right-2 sm:right-3 md:right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                <svg className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-gray-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
+            <div className="flex items-center justify-between">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700">
+                Are You an Agency?
+              </label>
+              
+              <div className="flex items-center gap-4">
+                <label className="flex items-center cursor-pointer">
+                  <input
+                    type="radio"
+                    name="agency"
+                    value="yes"
+                    checked={formData.agency === 'yes'}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => 
+                      setFormData({...formData, agency: e.target.value})
+                    }
+                    className="w-4 h-4 border-gray-300 focus:ring-0 focus:ring-offset-0"
+                    style={{
+                      accentColor: '#2353DF'
+                    }}
+                  />
+                  <span className="ml-2 text-xs sm:text-sm text-gray-700 font-medium">Yes</span>
+                </label>
+                
+                <label className="flex items-center cursor-pointer">
+                  <input
+                    type="radio"
+                    name="agency"
+                    value="no"
+                    checked={formData.agency === 'no'}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => 
+                      setFormData({...formData, agency: e.target.value})
+                    }
+                    className="w-4 h-4 border-gray-300 focus:ring-0 focus:ring-offset-0"
+                    style={{
+                      accentColor: '#2353DF'
+                    }}
+                  />
+                  <span className="ml-2 text-xs sm:text-sm text-gray-700 font-medium">No</span>
+                </label>
               </div>
             </div>
           </div>
@@ -273,6 +292,28 @@ const HeroSection = ({ email, setEmail, onEmailSubmit }: { email: string, setEma
           </div>
         </div>
       </div>
+
+      <div className="flex items-start justify-center gap-3 sm:gap-4 md:gap-5 lg:gap-6 mt-2 sm:mt-6 md:mt-10 lg:mt-12 px-4 absolute bottom-0 sm:relative sm:bottom-auto left-0 right-0">
+        <div className="w-full max-w-[320px] sm:max-w-[420px] md:max-w-[500px] lg:max-w-[580px] xl:max-w-[750px] 2xl:max-w-[1000px]">
+          <Image 
+            src="/brand-mentions.svg" 
+            alt="Brand Mentions Chart" 
+            width={1000}
+            height={480}
+            className="w-full h-auto"
+          />
+        </div>
+        
+        <div className="w-full max-w-[160px] sm:max-w-[200px] md:max-w-[240px] lg:max-w-[280px] xl:max-w-[350px] 2xl:max-w-[380px] flex items-start">
+          <Image 
+            src="/sov.svg" 
+            alt="Share of Voice Chart" 
+            width={380}
+            height={380}
+            className="w-full h-auto"
+          />
+        </div>
+      </div>
     </div>
   </section>
 );
@@ -289,7 +330,7 @@ const CompanyLogos = () => {
   ];
 
   return (
-    <section className="relative py-6 sm:py-8 md:py-12 lg:py-20 overflow-hidden">
+    <section className="relative py-12 sm:py-8 md:py-12 lg:py-20 overflow-hidden">
       <div className="flex items-center space-x-6 sm:space-x-8 md:space-x-12 lg:space-x-24 animate-scroll-rtl">
         {[...logos, ...logos].map((logo, index) => (
           <Image 
