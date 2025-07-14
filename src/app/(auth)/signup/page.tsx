@@ -1,10 +1,9 @@
-import { SignUpForm } from "@/components/forms/SignUpForm"
-import { AuthLayout } from "@/components/auth/AuthLayout"
-
-export default function SignUpPage() {
+const SignUpPage = () => {
   return (
-    <AuthLayout>
-      <SignUpForm />
-    </AuthLayout>
+    <div>
+      <h1>SignUp</h1>
+    </div>
   )
 }
+
+export default SignUpPage;
