@@ -1,12 +1,13 @@
 "use client";
 
-import { AuthCard } from "@/components/auth/AuthCard";
+import { OnboardCard } from "@/components/onboarding/OnboardCard";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const OnboardingForm = () => {
     const router = useRouter();
@@ -74,7 +75,7 @@ const OnboardingForm = () => {
                 return (
                     <div className="space-y-4">
                         <div className="space-y-2">
-                            <Label htmlFor="website" className="text-md font-medium text-neutral-700">
+                            <Label htmlFor="website" className="text-lg font-semibold text-[#636474]">
                                 Company Website URL
                             </Label>
                             <Input
@@ -90,7 +91,7 @@ const OnboardingForm = () => {
                 return (
                     <div className="space-y-4">
                         <div className="space-y-2">
-                            <Label htmlFor="company-name" className="text-md font-medium text-neutral-700">
+                            <Label htmlFor="company-name" className="text-lg font-semibold text-[#636474]">
                                 Company Name
                             </Label>
                             <Input
@@ -101,7 +102,7 @@ const OnboardingForm = () => {
                             />
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="company-description" className="text-md font-medium text-neutral-700">
+                            <Label htmlFor="company-description" className="text-lg font-semibold text-[#636474]">
                                 Company Description
                             </Label>
                             <div className="relative">
@@ -130,7 +131,7 @@ const OnboardingForm = () => {
                 return (
                     <div className="space-y-4">
                         <div className="space-y-2">
-                            <Label className="text-md font-medium text-neutral-700">
+                            <Label className="text-lg font-semibold text-[#636474]">
                                 Competitor
                             </Label>
                             <div className="space-y-3">
@@ -144,9 +145,9 @@ const OnboardingForm = () => {
                                             className="h-12 bg-neutral-50 border-neutral-200 focus:border-primary-blue-500 focus:ring-primary-blue-500 flex-1"
                                         />
 
-                                        <img src="/trush-square.svg" alt="trash" onClick={() => removeCompetitor(index)} className="cursor-pointer h-10 w-10" />
+                                        <Image width={40} height={40} src="/trush-square.svg" alt="trash" onClick={() => removeCompetitor(index)} className="cursor-pointer h-10 w-10" />
 
-                                        <img src="/add-square.svg" alt="plus" onClick={addCompetitor} className="cursor-pointer h-10 w-10" />
+                                        <Image width={40} height={40} src="/add-square.svg" alt="plus" onClick={addCompetitor} className="cursor-pointer h-10 w-10" />
                                     </div>
                                 ))}
                             </div>
@@ -159,7 +160,7 @@ const OnboardingForm = () => {
     };
 
     return (
-        <AuthCard
+        <OnboardCard
             title={
                 isComplete ? (
                     <>
@@ -211,7 +212,7 @@ const OnboardingForm = () => {
                                         type="button"
                                         variant="outline"
                                         onClick={handlePrevious}
-                                        className="h-12 w-full bg-white hover:bg-neutral-50 text-neutral-700 font-medium rounded-lg border border-neutral-200 hover:border-neutral-300 flex items-center justify-center gap-2 hover:cursor-pointer"
+                                        className="h-12 w-full bg-white hover:bg-neutral-50 text-[#26262B] font-medium rounded-lg border border-neutral-200 hover:border-neutral-300 flex items-center justify-center gap-2 hover:cursor-pointer"
                                     >
                                         ← Previous
                                     </Button>
@@ -261,7 +262,7 @@ const OnboardingForm = () => {
                     </div>
                 )}
             </div>
-        </AuthCard>
+        </OnboardCard>
     );
 };
 

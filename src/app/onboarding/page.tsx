@@ -1,11 +1,11 @@
-import { AuthLayout } from "@/components/auth/AuthLayout";
+import { OnboardLayout } from "@/components/onboarding/OnboardLayout";
 import OnboardingForm from "@/components/forms/OnboardingForm";
 
 const OnboardingPage = () => {
     return (
-        <AuthLayout>
+        <OnboardLayout>
             <OnboardingForm />
-        </AuthLayout>
+        </OnboardLayout>
     )
 }
 
