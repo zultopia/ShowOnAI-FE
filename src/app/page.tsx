@@ -20,6 +20,11 @@ export default function Home() {
             Signup
           </Link>
         </li>
+        <li>
+          <Link href="/onboarding" className="block w-full bg-secondary-blue-900 text-white rounded px-4 py-3 text-center">
+            Onboarding
+          </Link>
+        </li>
       </ul>
     </div>
   );
