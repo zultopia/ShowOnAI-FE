@@ -12,7 +12,7 @@ const typography = {
 } as const;
 
 export const FeaturesSection = memo(function FeaturesSection() {
-  const features = useMemo(() => [
+    const features = useMemo(() => [
     {
       icon: (
         <Image src="/assets/Icon-1.svg" alt="Diagnosis" width={64} height={64} className="w-16 h-16" loading="lazy" />
@@ -21,7 +21,8 @@ export const FeaturesSection = memo(function FeaturesSection() {
       description: "생성형 AI에서 브랜드 노출 현황을 정확히 진단하고 개선점을 찾아드립니다.",
       subtitle: "ChatGPT, Gemini에서 우리 브랜드가 언급되는지 확인하고, AI가 우리를 어떻게 인식하는지 분석하여 개선점을 찾습니다.",
       imagePosition: "right",
-      gradient: "from-blue-400 to-purple-500"
+      gradient: "from-blue-400 to-purple-500",
+      image: "/diagnosis.svg"
     },
     {
       icon: (
@@ -31,7 +32,8 @@ export const FeaturesSection = memo(function FeaturesSection() {
       description: "검색 엔진 변화에 선제적으로 대응하여 브랜드 가시성을 보호합니다.",
       subtitle: "부정적 콘텐츠나 잘못된 정보가 생성형 AI에 학습되지 않도록 차단하고, 브랜드 이미지를 보호하는 전략을 수립합니다.",
       imagePosition: "left",
-      gradient: "from-green-400 to-blue-500"
+      gradient: "from-green-400 to-blue-500",
+      image: "/prescription.svg" 
     },
     {
       icon: (
@@ -41,7 +43,8 @@ export const FeaturesSection = memo(function FeaturesSection() {
       description: "실시간 모니터링으로 SEO 성과를 추적하고 지속적으로 최적화합니다.",
       subtitle: "다양한 검색 시나리오에서 우리 브랜드의 언급 빈도와 순위 변화를 추적하여 지속적인 개선점을 파악합니다.",
       imagePosition: "right",
-      gradient: "from-purple-400 to-pink-500"
+      gradient: "from-purple-400 to-pink-500",
+      image: "/tracking.svg" 
     }
   ], []);
 
@@ -90,12 +93,15 @@ export const FeaturesSection = memo(function FeaturesSection() {
               
               <div className="flex-1 max-w-2xl w-full">
                 <div className="relative group">
-                  <div className="w-full h-[400px] md:h-[500px] bg-neutral-900 rounded-2xl overflow-hidden shadow-xl">
-                    <div className="w-full h-full flex items-center justify-center">
-                      <div className="text-neutral-500 text-4xl font-bold opacity-20">
-                        IMAGE
-                      </div>
-                    </div>
+                  <div className="w-full h-[400px] md:h-[500px] bg-white rounded-2xl overflow-hidden shadow-xl flex items-center justify-center">
+                    <Image 
+                      src={feature.image}
+                      alt={feature.title}
+                      width={500}
+                      height={400}
+                      className="w-full h-full object-contain"
+                      loading="lazy"
+                    />
                   </div>
                   
                   <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>

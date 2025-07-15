@@ -4,11 +4,11 @@ import React, { useState, useEffect, Suspense, lazy, memo, useMemo, useCallback 
 import Image from 'next/image';
 import { DemoDialogProps, DemoFormData, HeaderProps, HeroSectionProps, CTASectionProps } from '@/types';
 
-const CompanyLogos = lazy(() => 
-  import('../components/landing/CompanyLogos')
-    .then(module => ({ default: module.CompanyLogos || module.default }))
-    .catch(() => ({ default: CompanyLogosPlaceholder }))
-);
+// const CompanyLogos = lazy(() => 
+//   import('../components/landing/CompanyLogos')
+//     .then(module => ({ default: module.CompanyLogos || module.default }))
+//     .catch(() => ({ default: CompanyLogosPlaceholder }))
+// );
 const QuoteSection = lazy(() => 
   import('../components/landing/QuoteSection')
     .then(module => ({ default: module.QuoteSection || module.default }))
@@ -43,17 +43,17 @@ const typography = {
   price: "font-manrope font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl",
 } as const;
 
-const CompanyLogosPlaceholder = memo(function CompanyLogosPlaceholder() {
-  return (
-    <section className="relative py-12 sm:py-8 md:py-12 lg:py-20 overflow-hidden">
-      <div className="flex items-center space-x-6 sm:space-x-8 md:space-x-12 lg:space-x-24">
-        {Array.from({ length: 7 }).map((_, index) => (
-          <div key={index} className="h-3 sm:h-4 md:h-6 lg:h-10 w-20 bg-gray-200 animate-pulse rounded flex-shrink-0" />
-        ))}
-      </div>
-    </section>
-  );
-});
+// const CompanyLogosPlaceholder = memo(function CompanyLogosPlaceholder() {
+//   return (
+//     <section className="relative py-12 sm:py-8 md:py-12 lg:py-20 overflow-hidden">
+//       <div className="flex items-center space-x-6 sm:space-x-8 md:space-x-12 lg:space-x-24">
+//         {Array.from({ length: 7 }).map((_, index) => (
+//           <div key={index} className="h-3 sm:h-4 md:h-6 lg:h-10 w-20 animate-pulse rounded flex-shrink-0" />
+//         ))}
+//       </div>
+//     </section>
+//   );
+// });
 
 const QuoteSectionPlaceholder = memo(function QuoteSectionPlaceholder() {
   return (
@@ -409,7 +409,7 @@ const HeroSection = memo(function HeroSection({ email, setEmail, onEmailSubmit }
         </div>
 
         <h1 className={`${typography.h1} text-white mb-3 sm:mb-4 md:mb-6 max-w-5xl mx-auto px-2`}>
-          국내 시장의 AI 검색 최적화를 위한<br />
+          국내 시장의 AI 검색 최적화를 위한
           단 하나의 솔루션, ShowOnAI
         </h1>
 
@@ -629,7 +629,7 @@ function LandingPage() {
 
   return (
     <div className="min-h-screen bg-blue-50 font-manrope scroll-smooth flex flex-col" style={{backgroundImage:'url(/landing-page.svg)', backgroundSize: 'cover', backgroundPosition: 'top center' }}>
-      <div className="relative flex-shrink-0">        
+      <div className="relative flex-shrink-0 pb-8 sm:pb-12 md:pb-16 lg:pb-20">        
         <div 
           className="relative z-10 rounded-[24px] mx-4 mt-1 sm:mt-2 md:mt-3 lg:mt-4 overflow-hidden" 
           style={{ 
@@ -653,10 +653,10 @@ function LandingPage() {
         </div>
       </div>
       
-      <div className="flex-grow flex flex-col">
-        <Suspense fallback={<CompanyLogosPlaceholder />}>
+      <div className="flex-grow flex flex-col relative z-0">
+        {/* <Suspense fallback={<CompanyLogosPlaceholder />}>
           <CompanyLogos />
-        </Suspense>
+        </Suspense> */}
         
         <Suspense fallback={<QuoteSectionPlaceholder />}>
           <QuoteSection />
