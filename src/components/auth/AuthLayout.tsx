@@ -1,5 +1,4 @@
 import type React from "react"
-import { Header } from "@/components/layout/Header"
 
 interface AuthLayoutProps {
   children: React.ReactNode
@@ -8,7 +7,6 @@ interface AuthLayoutProps {
 export function AuthLayout({ children }: AuthLayoutProps) {
   return (
     <div className="min-h-screen bg-primary-blue-50 relative flex flex-col">
-      <Header />
 
       <main className="flex flex-1 items-center justify-center px-4 py-8 md:py-12 relative">
         <div
