@@ -633,8 +633,8 @@ function LandingPage() {
         <div 
           className="relative z-10 rounded-[24px] mx-4 mt-1 sm:mt-2 md:mt-3 lg:mt-4 overflow-hidden" 
           style={{ 
-            height: 'clamp(600px, 100vh, 1200px)',
-            minHeight: '600px',
+            height: 'clamp(800px, 95vh, 1800px)',
+            minHeight: '800px',
             backgroundImage: 'url(/background.svg)', 
             backgroundSize: 'cover', 
             backgroundPosition: 'top center' 
