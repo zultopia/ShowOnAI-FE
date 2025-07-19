@@ -438,8 +438,8 @@ const HeroSection = memo(function HeroSection({ email, setEmail, onEmailSubmit }
           </div>
         </div>
 
-        <div className="hidden sm:flex flex-col sm:flex-row items-start justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-10 mt-4 sm:mt-6 md:mt-8 lg:mt-12 px-4">
-          <div className="w-full max-w-[280px] sm:max-w-[350px] md:max-w-[420px] lg:max-w-[500px] xl:max-w-[600px] 2xl:max-w-[700px]">
+        <div className="hidden sm:flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-10 mt-4 sm:mt-6 md:mt-8 lg:mt-12 px-4">
+          <div className="w-full max-w-[500px] sm:max-w-[650px] md:max-w-[750px] lg:max-w-[850px] xl:max-w-[950px] 2xl:max-w-[1050px]">
             <Image 
               src="/brand-mentions.svg" 
               alt="Brand Mentions Chart" 
@@ -450,12 +450,12 @@ const HeroSection = memo(function HeroSection({ email, setEmail, onEmailSubmit }
             />
           </div>
           
-          <div className="w-full max-w-[200px] sm:max-w-[250px] md:max-w-[300px] lg:max-w-[350px] xl:max-w-[400px] 2xl:max-w-[450px]">
+          <div className="w-full max-w-[130px] sm:max-w-[180px] md:max-w-[230px] lg:max-w-[280px] xl:max-w-[330px] 2xl:max-w-[380px] mt-8 sm:mt-10 md:mt-12 lg:mt-16">
             <Image 
               src="/sov.svg" 
               alt="Share of Voice Chart" 
-              width={450}
-              height={450}
+              width={380}
+              height={380}
               className="w-full h-auto"
               loading="lazy"
             />
@@ -633,8 +633,8 @@ function LandingPage() {
         <div 
           className="relative z-10 rounded-[24px] mx-4 mt-1 sm:mt-2 md:mt-3 lg:mt-4 overflow-hidden" 
           style={{ 
-            height: 'clamp(800px, 95vh, 1800px)',
-            minHeight: '800px',
+            height: 'clamp(1000px, 110vh, 2200px)',
+            minHeight: '1000px',
             backgroundImage: 'url(/background.svg)', 
             backgroundSize: 'cover', 
             backgroundPosition: 'top center' 
