@@ -3,6 +3,9 @@
 import React, { useState, useEffect, Suspense, lazy, memo, useMemo, useCallback } from 'react';
 import Image from 'next/image';
 import { DemoDialogProps, DemoFormData, HeaderProps, HeroSectionProps, CTASectionProps } from '@/types';
+import { useNavbar } from '@/hooks/useNavbar';
+import { Navbar } from '@/components/layout/Navbar';
+import { Footer } from '@/components/layout/Footer';
 
 // const CompanyLogos = lazy(() => 
 //   import('../components/landing/CompanyLogos')
@@ -353,47 +356,7 @@ const DemoDialog = memo(function DemoDialog({ isOpen, onClose, formData, setForm
   );
 });
 
-const Header = memo(function Header({ onLoginClick, onDashboardClick }: HeaderProps) {
-  return (
-    <header className="relative z-50 px-3 sm:px-4 lg:px-8 pt-3 sm:pt-4 md:pt-6 lg:pt-12">
-      <div className="max-w-7xl mx-auto flex justify-center">
-        <nav className="flex items-center justify-between w-full max-w-5xl h-9 sm:h-10 md:h-12 lg:h-15 px-2 sm:px-3 md:px-4 lg:px-6 py-1.5 sm:py-2 rounded-full border border-white/60 bg-white/30 backdrop-blur-lg">
-          <div className="flex items-center">
-            <Image 
-              src="/showonai-white.svg" 
-              alt="ShowOnAI" 
-              width={176} 
-              height={44} 
-              className="h-5 sm:h-6 md:h-8 lg:h-11 w-auto"
-              priority
-            />
-          </div>
 
-          <div className="hidden lg:flex items-center space-x-8">
-            <a href="#features" className="text-white/90 hover:text-white transition-colors font-medium">기능</a>
-            <a href="#pricing" className="text-white/90 hover:text-white transition-colors font-medium">가격정책</a>
-            <a href="#" className="text-white/90 hover:text-white transition-colors font-medium">블로그</a>
-          </div>
-
-          <div className="flex items-center space-x-1 sm:space-x-2">
-            <button
-              onClick={onDashboardClick}
-              className="px-1.5 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-2 rounded-full bg-white text-blue-600 font-semibold text-xs sm:text-xs md:text-sm lg:text-base hover:bg-gray-50 transition-colors active:scale-95 whitespace-nowrap"
-            >
-              데모 요청
-            </button>
-            <button
-              onClick={onLoginClick}
-              className="px-1.5 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-2 rounded-full bg-blue-600 text-white font-semibold text-xs sm:text-xs md:text-sm lg:text-base hover:bg-blue-700 transition-colors active:scale-95"
-            >
-              로그인
-            </button>
-          </div>
-        </nav>
-      </div>
-    </header>
-  );
-});
 
 const HeroSection = memo(function HeroSection({ email, setEmail, onEmailSubmit }: HeroSectionProps) {
   const handleEmailChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -500,96 +463,27 @@ const CTASection = memo(function CTASection({ onDashboardClick }: CTASectionProp
   );
 });
 
-const Footer = memo(function Footer() {
-  return (
-    <footer className="relative px-4 sm:px-6 lg:px-8 py-8 sm:py-10 md:py-12 lg:py-16 bg-white">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col space-y-6 sm:space-y-8 md:space-y-0 md:flex-row md:items-center md:justify-between">
-          <div className="flex flex-col items-start gap-2 sm:gap-3">
-            <Image 
-              src="/showonai.svg" 
-              alt="ShowOnAI" 
-              width={176} 
-              height={48}
-              className="h-6 sm:h-8 md:h-10 lg:h-12 w-auto"
-              loading="lazy"
-            />
-            <p className="text-gray-500 text-sm sm:text-sm md:text-base max-w-xs">
-              Smart local AI-powered SEO Analysis
-            </p>
-          </div>
-          
-          <div className="flex flex-wrap items-end gap-4 sm:gap-6 md:gap-8 md:self-end">
-            <nav className="flex flex-wrap items-center gap-4 sm:gap-6 md:gap-8">
-              <a 
-                href="#" 
-                className="text-gray-400 hover:text-gray-900 transition-colors font-medium text-sm md:text-base py-2 sm:py-1 hover:underline focus:outline-none focus:underline"
-              >
-                About
-              </a>
-              <a 
-                href="#pricing" 
-                className="text-gray-400 hover:text-gray-900 transition-colors font-medium text-sm md:text-base py-2 sm:py-1 hover:underline focus:outline-none focus:underline"
-              >
-                Pricing
-              </a>
-              <a 
-                href="#" 
-                className="text-gray-400 hover:text-gray-900 transition-colors font-medium text-sm md:text-base py-2 sm:py-1 hover:underline focus:outline-none focus:underline"
-              >
-                Docs
-              </a>
-              <a 
-                href="#" 
-                className="text-gray-400 hover:text-gray-900 transition-colors font-medium text-sm md:text-base py-2 sm:py-1 hover:underline focus:outline-none focus:underline"
-              >
-                Blog
-              </a>
-            </nav>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-});
+
 
 function LandingPage() {
   const [email, setEmail] = useState<string>('');
   const [isYearly, setIsYearly] = useState<boolean>(true);
   const [expandedFaq, setExpandedFaq] = useState<number[]>([1]);
-  const [showDemoDialog, setShowDemoDialog] = useState<boolean>(false);
-  const [demoForm, setDemoForm] = useState<DemoFormData>({
-    name: '',
-    employees: '',
-    timeline: '',
-    agency: ''
-  });
+  
+  const {
+    showDemoDialog,
+    demoForm,
+    handleLoginClick,
+    handleDashboardClick,
+    handleCloseDialog,
+    handleSetDemoForm
+  } = useNavbar();
 
   const handleEmailSubmit = useCallback(() => {
     if (email) {
       window.location.href = `/login?email=${encodeURIComponent(email)}`;
     }
   }, [email]);
-
-  const handleLoginClick = useCallback(() => {
-    window.location.href = '/login';
-  }, []);
-
-  const handleDashboardClick = useCallback(() => {
-    setShowDemoDialog(true);
-  }, []);
-
-  const handleCloseDialog = useCallback(() => {
-    setShowDemoDialog(false);
-  }, []);
-
-  const handleSetDemoForm = useCallback((value: DemoFormData | ((prev: DemoFormData) => DemoFormData)) => {
-    if (typeof value === 'function') {
-      setDemoForm(value);
-    } else {
-      setDemoForm(value);
-    }
-  }, []);
 
   useEffect(() => {
     if (showDemoDialog) {
@@ -640,7 +534,7 @@ function LandingPage() {
             backgroundPosition: 'top center' 
           }}
         >
-          <Header 
+          <Navbar 
             onLoginClick={handleLoginClick}
             onDashboardClick={handleDashboardClick}
           />
