@@ -2,36 +2,32 @@
 
 import React, { useState, useEffect, Suspense, lazy, memo, useMemo, useCallback } from 'react';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { DemoDialogProps, DemoFormData, HeaderProps, HeroSectionProps, CTASectionProps } from '@/types';
 import { useNavbar } from '@/hooks/useNavbar';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 
-// const CompanyLogos = lazy(() => 
-//   import('../components/landing/CompanyLogos')
-//     .then(module => ({ default: module.CompanyLogos || module.default }))
-//     .catch(() => ({ default: CompanyLogosPlaceholder }))
-// );
-const QuoteSection = lazy(() => 
-  import('../components/landing/QuoteSection')
-    .then(module => ({ default: module.QuoteSection || module.default }))
-    .catch(() => ({ default: QuoteSectionPlaceholder }))
-);
-const FeaturesSection = lazy(() => 
-  import('../components/landing/FeaturesSection')
-    .then(module => ({ default: module.FeaturesSection || module.default }))
-    .catch(() => ({ default: FeaturesSectionPlaceholder }))
-);
-const PricingSection = lazy(() => 
-  import('../components/landing/PricingSection')
-    .then(module => ({ default: module.PricingSection || module.default }))
-    .catch(() => ({ default: PricingSectionPlaceholder }))
-);
-const FAQSection = lazy(() => 
-  import('../components/landing/FAQSection')
-    .then(module => ({ default: module.FAQSection || module.default }))
-    .catch(() => ({ default: FAQSectionPlaceholder }))
-);
+// Dynamic imports with loading states - better for code splitting
+const QuoteSection = dynamic(() => import('../components/landing/QuoteSection'), {
+  loading: () => <QuoteSectionPlaceholder />,
+  ssr: true
+});
+
+const FeaturesSection = dynamic(() => import('../components/landing/FeaturesSection'), {
+  loading: () => <FeaturesSectionPlaceholder />,
+  ssr: true
+});
+
+const PricingSection = dynamic(() => import('../components/landing/PricingSection'), {
+  loading: () => <PricingSectionPlaceholder />,
+  ssr: true
+});
+
+const FAQSection = dynamic(() => import('../components/landing/FAQSection'), {
+  loading: () => <FAQSectionPlaceholder />,
+  ssr: true
+});
 
 const typography = {
   h1: "font-manrope font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl leading-tight",
@@ -46,18 +42,7 @@ const typography = {
   price: "font-manrope font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl",
 } as const;
 
-// const CompanyLogosPlaceholder = memo(function CompanyLogosPlaceholder() {
-//   return (
-//     <section className="relative py-12 sm:py-8 md:py-12 lg:py-20 overflow-hidden">
-//       <div className="flex items-center space-x-6 sm:space-x-8 md:space-x-12 lg:space-x-24">
-//         {Array.from({ length: 7 }).map((_, index) => (
-//           <div key={index} className="h-3 sm:h-4 md:h-6 lg:h-10 w-20 animate-pulse rounded flex-shrink-0" />
-//         ))}
-//       </div>
-//     </section>
-//   );
-// });
-
+// Optimized placeholder components with reduced DOM complexity
 const QuoteSectionPlaceholder = memo(function QuoteSectionPlaceholder() {
   return (
     <section className="relative py-12 md:py-24 px-4 sm:px-6 lg:px-8">
@@ -65,7 +50,6 @@ const QuoteSectionPlaceholder = memo(function QuoteSectionPlaceholder() {
         <div className="text-right mb-12 md:mb-24">
           <div className="max-w-4xl ml-auto space-y-4">
             <div className="h-8 bg-gray-200 animate-pulse rounded w-3/4 ml-auto" />
-            <div className="h-8 bg-gray-200 animate-pulse rounded w-1/2 ml-auto" />
             <div className="h-6 bg-gray-200 animate-pulse rounded w-1/4 ml-auto" />
           </div>
         </div>
@@ -85,19 +69,14 @@ const FeaturesSectionPlaceholder = memo(function FeaturesSectionPlaceholder() {
         <div className="text-center mb-16 md:mb-24 space-y-4">
           <div className="h-4 bg-blue-200 animate-pulse rounded w-24 mx-auto" />
           <div className="h-10 bg-gray-200 animate-pulse rounded w-1/2 mx-auto" />
-          <div className="h-6 bg-gray-200 animate-pulse rounded w-3/4 mx-auto" />
         </div>
         <div className="space-y-16 md:space-y-24">
-          {Array.from({ length: 3 }).map((_, index) => (
+          {Array.from({ length: 3 }, (_, index) => (
             <div key={index} className="flex flex-col lg:flex-row items-center gap-8 md:gap-16">
               <div className="flex-1 space-y-4">
                 <div className="w-16 h-16 bg-gray-200 animate-pulse rounded" />
                 <div className="h-8 bg-gray-200 animate-pulse rounded w-1/2" />
                 <div className="h-6 bg-gray-200 animate-pulse rounded w-3/4" />
-                <div className="space-y-2">
-                  <div className="h-4 bg-gray-200 animate-pulse rounded" />
-                  <div className="h-4 bg-gray-200 animate-pulse rounded w-5/6" />
-                </div>
               </div>
               <div className="flex-1">
                 <div className="w-full h-[400px] md:h-[500px] bg-gray-200 animate-pulse rounded-2xl" />
@@ -117,21 +96,14 @@ const PricingSectionPlaceholder = memo(function PricingSectionPlaceholder() {
         <div className="text-center mb-6 sm:mb-8 md:mb-12 lg:mb-16 space-y-4">
           <div className="h-4 bg-blue-200 animate-pulse rounded w-20 mx-auto" />
           <div className="h-10 bg-gray-200 animate-pulse rounded w-1/3 mx-auto" />
-          <div className="h-6 bg-gray-200 animate-pulse rounded w-1/2 mx-auto" />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8 max-w-6xl mx-auto">
-          {Array.from({ length: 3 }).map((_, index) => (
+          {Array.from({ length: 3 }, (_, index) => (
             <div key={index} className="bg-white rounded-lg sm:rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 shadow-lg border border-gray-200">
               <div className="space-y-4">
                 <div className="h-8 bg-gray-200 animate-pulse rounded w-1/2" />
                 <div className="h-4 bg-gray-200 animate-pulse rounded" />
                 <div className="h-12 bg-gray-200 animate-pulse rounded w-1/3" />
-                <div className="h-10 bg-gray-200 animate-pulse rounded" />
-                <div className="space-y-2">
-                  {Array.from({ length: 6 }).map((_, i) => (
-                    <div key={i} className="h-4 bg-gray-200 animate-pulse rounded" />
-                  ))}
-                </div>
               </div>
             </div>
           ))}
@@ -148,10 +120,9 @@ const FAQSectionPlaceholder = memo(function FAQSectionPlaceholder() {
         <div className="text-center mb-6 sm:mb-8 md:mb-12 lg:mb-16 space-y-4">
           <div className="h-4 bg-blue-200 animate-pulse rounded w-32 mx-auto" />
           <div className="h-10 bg-gray-200 animate-pulse rounded w-1/3 mx-auto" />
-          <div className="h-6 bg-gray-200 animate-pulse rounded w-1/2 mx-auto" />
         </div>
         <div className="bg-white rounded-lg sm:rounded-xl border border-gray-200 overflow-hidden shadow-sm">
-          {Array.from({ length: 5 }).map((_, index) => (
+          {Array.from({ length: 5 }, (_, index) => (
             <div key={index} className={`p-4 ${index < 4 ? 'border-b border-gray-200' : ''}`}>
               <div className="h-6 bg-gray-200 animate-pulse rounded w-3/4" />
             </div>
@@ -162,6 +133,7 @@ const FAQSectionPlaceholder = memo(function FAQSectionPlaceholder() {
   );
 });
 
+// Optimized Dialog Component
 const DemoDialog = memo(function DemoDialog({ isOpen, onClose, formData, setFormData }: DemoDialogProps) {
   const employeeOptions = useMemo(() => [
     "1-10 employees",
@@ -179,24 +151,24 @@ const DemoDialog = memo(function DemoDialog({ isOpen, onClose, formData, setForm
     "More than 1 year"
   ], []);
 
+  // Optimized scroll lock
   useEffect(() => {
-    if (isOpen) {
-      const scrollY = window.scrollY;
-      
-      document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
-      
-      return () => {
-        document.body.style.overflow = '';
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
-        
-        window.scrollTo(0, scrollY);
-      };
-    }
+    if (!isOpen) return;
+
+    const scrollY = window.scrollY;
+    const body = document.body;
+    
+    body.style.cssText = `
+      overflow: hidden;
+      position: fixed;
+      top: -${scrollY}px;
+      width: 100%;
+    `;
+    
+    return () => {
+      body.style.cssText = '';
+      window.scrollTo(0, scrollY);
+    };
   }, [isOpen]);
 
   const handleSubmit = useCallback((e: React.FormEvent) => {
@@ -214,7 +186,7 @@ const DemoDialog = memo(function DemoDialog({ isOpen, onClose, formData, setForm
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4">
       <div 
-        className="absolute inset-0 bg-black/50"
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
         onClick={onClose}
       />
       
@@ -254,6 +226,8 @@ const DemoDialog = memo(function DemoDialog({ isOpen, onClose, formData, setForm
               onChange={(e) => handleInputChange('name', e.target.value)}
               placeholder="Enter Your Name"
               className="w-full px-3 py-2.5 sm:px-3 sm:py-3 md:px-4 md:py-4 bg-gray-50 border-0 rounded-lg text-gray-700 text-xs sm:text-sm outline-none transition-all focus:bg-white focus:shadow-lg focus:ring-2 focus:ring-blue-500/20 placeholder-gray-400"
+              required
+              aria-label="Name"
             />
           </div>
 
@@ -266,6 +240,8 @@ const DemoDialog = memo(function DemoDialog({ isOpen, onClose, formData, setForm
                 value={formData.employees}
                 onChange={(e) => handleInputChange('employees', e.target.value)}
                 className="w-full px-3 py-2.5 sm:px-3 sm:py-3 md:px-4 md:py-4 bg-gray-50 border-0 rounded-lg text-gray-700 text-xs sm:text-sm outline-none appearance-none transition-all focus:bg-white focus:shadow-lg focus:ring-2 focus:ring-blue-500/20 cursor-pointer hover:bg-gray-100"
+                required
+                aria-label="Number of Employees"
               >
                 <option value="" disabled className="text-gray-400">Select Number of Employees Category</option>
                 {employeeOptions.map((option, index) => (
@@ -289,6 +265,8 @@ const DemoDialog = memo(function DemoDialog({ isOpen, onClose, formData, setForm
                 value={formData.timeline}
                 onChange={(e) => handleInputChange('timeline', e.target.value)}
                 className="w-full px-3 py-2.5 sm:px-3 sm:py-3 md:px-4 md:py-4 bg-gray-50 border-0 rounded-lg text-gray-700 text-xs sm:text-sm outline-none appearance-none transition-all focus:bg-white focus:shadow-lg focus:ring-2 focus:ring-blue-500/20 cursor-pointer hover:bg-gray-100"
+                required
+                aria-label="Timeline for Investing in GEO Strategy"
               >
                 <option value="" disabled className="text-gray-400">Select Timeline for Investing in GEO Strategy</option>
                 {timelineOptions.map((option, index) => (
@@ -342,7 +320,7 @@ const DemoDialog = memo(function DemoDialog({ isOpen, onClose, formData, setForm
           <div className="flex justify-center md:justify-end pt-2 sm:pt-3 md:pt-4">
             <button
               type="submit"
-              className="w-full sm:w-full md:w-auto bg-gray-900 text-white py-2.5 sm:py-3 px-4 sm:px-6 md:px-8 rounded-lg font-medium hover:bg-gray-800 transition-all duration-200 flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95"
+              className="w-full sm:w-full md:w-auto bg-gray-900 text-white py-2.5 sm:py-3 px-4 sm:px-6 md:px-8 rounded-lg font-medium hover:bg-gray-800 transition-all duration-200 flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-gray-900/20"
             >
               Continue
               <svg className="w-3 h-3 sm:w-4 sm:h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -356,12 +334,16 @@ const DemoDialog = memo(function DemoDialog({ isOpen, onClose, formData, setForm
   );
 });
 
-
-
+// Optimized Hero Section
 const HeroSection = memo(function HeroSection({ email, setEmail, onEmailSubmit }: HeroSectionProps) {
   const handleEmailChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   }, [setEmail]);
+
+  const handleSubmit = useCallback((e: React.FormEvent) => {
+    e.preventDefault();
+    onEmailSubmit();
+  }, [onEmailSubmit]);
 
   return (
     <section className="relative flex justify-center px-4 sm:px-6 lg:px-8 py-4 sm:py-6 md:py-8 lg:py-16 pb-8 sm:pb-12 md:pb-16 lg:pb-20">
@@ -382,7 +364,7 @@ const HeroSection = memo(function HeroSection({ email, setEmail, onEmailSubmit }
         </p>
         
         <div className="flex justify-center px-3 sm:px-4 mb-8 sm:mb-8 md:mb-12 lg:mb-16">
-          <div className="flex flex-col sm:flex-row items-center w-full max-w-xs sm:max-w-lg md:max-w-xl lg:max-w-2xl gap-2 sm:gap-0">
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center w-full max-w-xs sm:max-w-lg md:max-w-xl lg:max-w-2xl gap-2 sm:gap-0">
             <div className="flex items-center w-full h-9 sm:h-10 md:h-12 lg:h-14 px-1 sm:px-1 md:px-2 rounded-full border border-gray-200 bg-white shadow-2xl">
               <input
                 type="email"
@@ -390,15 +372,17 @@ const HeroSection = memo(function HeroSection({ email, setEmail, onEmailSubmit }
                 value={email}
                 onChange={handleEmailChange}
                 className="flex-1 ml-1.5 sm:ml-2 md:ml-4 bg-transparent border-none outline-none text-gray-600 placeholder-gray-400 text-xs sm:text-sm md:text-base lg:text-lg"
+                required
+                aria-label="Company Email"
               />
               <button
-                onClick={onEmailSubmit}
-                className="ml-1 sm:ml-1 md:ml-2 px-2 sm:px-2.5 md:px-4 lg:px-6 py-1 md:py-1 lg:py-2 rounded-full bg-black text-white font-semibold text-xs sm:text-xs md:text-sm lg:text-lg hover:bg-gray-800 transition-colors active:scale-95 whitespace-nowrap"
+                type="submit"
+                className="ml-1 sm:ml-1 md:ml-2 px-2 sm:px-2.5 md:px-4 lg:px-6 py-1 md:py-1 lg:py-2 rounded-full bg-black text-white font-semibold text-xs sm:text-xs md:text-sm lg:text-lg hover:bg-gray-800 transition-colors active:scale-95 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-gray-900/20"
               >
                 무료 진단 받기
               </button>
             </div>
-          </div>
+          </form>
         </div>
 
         <div className="hidden sm:flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-10 mt-4 sm:mt-6 md:mt-8 lg:mt-12 px-4">
@@ -410,6 +394,8 @@ const HeroSection = memo(function HeroSection({ email, setEmail, onEmailSubmit }
               height={336}
               className="w-full h-auto"
               loading="lazy"
+              placeholder="blur"
+              blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzAwIiBoZWlnaHQ9IjMzNiIgdmlld0JveD0iMCAwIDcwMCAzMzYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjcwMCIgaGVpZ2h0PSIzMzYiIGZpbGw9IiNmZmZmZmYiIG9wYWNpdHk9IjAuNSIvPjwvc3ZnPg=="
             />
           </div>
           
@@ -421,6 +407,8 @@ const HeroSection = memo(function HeroSection({ email, setEmail, onEmailSubmit }
               height={380}
               className="w-full h-auto"
               loading="lazy"
+              placeholder="blur"
+              blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzgwIiBoZWlnaHQ9IjM4MCIgdmlld0JveD0iMCAwIDM4MCAzODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjM4MCIgaGVpZ2h0PSIzODAiIGZpbGw9IiNmZmZmZmYiIG9wYWNpdHk9IjAuNSIvPjwvc3ZnPg=="
             />
           </div>
         </div>
@@ -445,7 +433,7 @@ const CTASection = memo(function CTASection({ onDashboardClick }: CTASectionProp
           
           <button 
             onClick={onDashboardClick}
-            className="inline-flex items-center gap-1.5 sm:gap-2 bg-black text-white px-3 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-2.5 md:py-3 lg:py-4 rounded-lg sm:rounded-xl md:rounded-[20px] font-medium text-xs sm:text-sm md:text-base hover:bg-gray-800 transition-colors shadow-lg active:scale-95"
+            className="inline-flex items-center gap-1.5 sm:gap-2 bg-black text-white px-3 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-2.5 md:py-3 lg:py-4 rounded-lg sm:rounded-xl md:rounded-[20px] font-medium text-xs sm:text-sm md:text-base hover:bg-gray-800 transition-colors shadow-lg active:scale-95 focus:outline-none focus:ring-2 focus:ring-gray-900/20"
           >
             데모 요청
             <Image 
@@ -463,8 +451,6 @@ const CTASection = memo(function CTASection({ onDashboardClick }: CTASectionProp
   );
 });
 
-
-
 function LandingPage() {
   const [email, setEmail] = useState<string>('');
   const [isYearly, setIsYearly] = useState<boolean>(true);
@@ -480,31 +466,32 @@ function LandingPage() {
   } = useNavbar();
 
   const handleEmailSubmit = useCallback(() => {
-    if (email) {
+    if (email && email.includes('@')) {
       window.location.href = `/login?email=${encodeURIComponent(email)}`;
     }
   }, [email]);
 
+  // Optimized scroll lock
   useEffect(() => {
-    if (showDemoDialog) {
-      const scrollY = window.scrollY;
-      
-      document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
-      
-      return () => {
-        document.body.style.overflow = '';
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
-        
-        window.scrollTo(0, scrollY);
-      };
-    }
+    if (!showDemoDialog) return;
+
+    const scrollY = window.scrollY;
+    const body = document.body;
+    
+    body.style.cssText = `
+      overflow: hidden;
+      position: fixed;
+      top: -${scrollY}px;
+      width: 100%;
+    `;
+    
+    return () => {
+      body.style.cssText = '';
+      window.scrollTo(0, scrollY);
+    };
   }, [showDemoDialog]);
 
+  // Preload critical images
   useEffect(() => {
     const preloadImages = [
       '/showonai-white.svg',
@@ -512,13 +499,23 @@ function LandingPage() {
       '/sov.svg'
     ];
 
-    preloadImages.forEach(src => {
+    const linkElements = preloadImages.map(src => {
       const link = document.createElement('link');
       link.rel = 'preload';
       link.as = 'image';
       link.href = src;
-      document.head.appendChild(link);
+      return link;
     });
+
+    linkElements.forEach(link => document.head.appendChild(link));
+
+    return () => {
+      linkElements.forEach(link => {
+        if (link.parentNode) {
+          link.parentNode.removeChild(link);
+        }
+      });
+    };
   }, []);
 
   return (
@@ -548,25 +545,10 @@ function LandingPage() {
       </div>
       
       <div className="flex-grow flex flex-col relative z-0">
-        {/* <Suspense fallback={<CompanyLogosPlaceholder />}>
-          <CompanyLogos />
-        </Suspense> */}
-        
-        <Suspense fallback={<QuoteSectionPlaceholder />}>
-          <QuoteSection />
-        </Suspense>
-        
-        <Suspense fallback={<FeaturesSectionPlaceholder />}>
-          <FeaturesSection />
-        </Suspense>
-        
-        <Suspense fallback={<PricingSectionPlaceholder />}>
-          <PricingSection isYearly={isYearly} setIsYearly={setIsYearly} />
-        </Suspense>
-        
-        <Suspense fallback={<FAQSectionPlaceholder />}>
-          <FAQSection expandedFaq={expandedFaq} setExpandedFaq={setExpandedFaq} />
-        </Suspense>
+        <QuoteSection />
+        <FeaturesSection />
+        <PricingSection isYearly={isYearly} setIsYearly={setIsYearly} />
+        <FAQSection expandedFaq={expandedFaq} setExpandedFaq={setExpandedFaq} />
 
         <div className="mt-auto">
           <CTASection onDashboardClick={handleDashboardClick} />
@@ -581,6 +563,16 @@ function LandingPage() {
         @media (max-width: 768px) {
           .animate-pulse {
             animation-duration: 1.5s;
+          }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .animate-pulse {
+            animation: none;
+          }
+          .transition-all,
+          .transition-colors,
+          .transition-transform {
+            transition: none;
           }
         }
       `}</style>

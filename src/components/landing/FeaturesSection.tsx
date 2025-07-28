@@ -22,7 +22,7 @@ export const FeaturesSection = memo(function FeaturesSection() {
       subtitle: "ChatGPT, Gemini에서 우리 브랜드가 언급되는지 확인하고, AI가 우리를 어떻게 인식하는지 분석하여 개선점을 찾습니다.",
       imagePosition: "right",
       gradient: "from-blue-400 to-purple-500",
-      image: "/diagnosis.svg"
+      image: "/diagnosis.png"
     },
     {
       icon: (
@@ -33,7 +33,7 @@ export const FeaturesSection = memo(function FeaturesSection() {
       subtitle: "부정적 콘텐츠나 잘못된 정보가 생성형 AI에 학습되지 않도록 차단하고, 브랜드 이미지를 보호하는 전략을 수립합니다.",
       imagePosition: "left",
       gradient: "from-green-400 to-blue-500",
-      image: "/prescription.svg" 
+      image: "/prescription.png" 
     },
     {
       icon: (
@@ -44,7 +44,7 @@ export const FeaturesSection = memo(function FeaturesSection() {
       subtitle: "다양한 검색 시나리오에서 우리 브랜드의 언급 빈도와 순위 변화를 추적하여 지속적인 개선점을 파악합니다.",
       imagePosition: "right",
       gradient: "from-purple-400 to-pink-500",
-      image: "/tracking.svg" 
+      image: "/tracking.png" 
     }
   ], []);
 
