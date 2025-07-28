@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { useNavbar } from '@/hooks/useNavbar';
-import { blogData, BlogPost } from '@/types/blog';
+import { blogData, BlogPost, BlogDetail, BlogDetailSection } from '@/types/blog';
 
 const typography = {
   h1: "font-manrope font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl leading-tight",
@@ -21,8 +21,7 @@ const typography = {
   price: "font-manrope font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl",
 } as const;
 
-// Dummy blog detail data
-const blogDetailData: { [key: string]: any } = {
+const blogDetailData: { [key: string]: BlogDetail } = {
   '2025-seo-future': {
     title: "2025년 SEO의 미래: AI가 주도하는 검색 최적화의 대전환",
     excerpt: "기존의 검색엔진을 위한 콘텐츠만으로는 부족합니다. ChatGPT, Perplexity, Gemini와 같은 AI 플랫폼을 위한 새로운 표준인 'GEO(Generative Engine Optimization)'가 등장했습니다.",
@@ -223,7 +222,7 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
       {/* Content Sections */}
       <section className="relative px-4 sm:px-6 lg:px-8 pb-16 md:pb-20 lg:pb-24">
         <div className="max-w-7xl mx-auto">
-          {blogDetail.content.sections.map((section: any, index: number) => (
+          {blogDetail.content.sections.map((section: BlogDetailSection, index: number) => (
             <div key={index} className="mb-8">
               {section.type === 'image' && (
                 <div className="relative mb-8 flex justify-center">
@@ -299,7 +298,7 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
                 </div>
               )}
 
-              {section.note && (
+              {section.type === 'comparison' && section.note && (
                 <p className={`${typography.body} text-gray-500 italic text-center mb-6 max-w-4xl mx-auto`}>
                   {section.note}
                 </p>

@@ -97,3 +97,55 @@ export const blogData: BlogPost[] = [
     slug: 'global-seo-expert-interview'
   }
 ]; 
+
+export type BlogDetailSection =
+  | {
+      type: 'hero';
+      title: string;
+      subtitle: string;
+      metadata: {
+        category: string;
+        author: string;
+        date: string;
+      };
+    }
+  | {
+      type: 'image';
+      image: string;
+      overlayText: string;
+      subtitle: string;
+      watermark: string;
+    }
+  | {
+      type: 'text';
+      content: string;
+      highlight?: string;
+    }
+  | {
+      type: 'heading';
+      title: string;
+    }
+  | {
+      type: 'comparison';
+      image: string;
+      cards: {
+        title: string;
+        icon: string;
+        description: string;
+        color: string;
+      }[];
+      note?: string; 
+    };
+
+export type BlogDetail = {
+  title: string;
+  excerpt: string;
+  author: string;
+  date: string;
+  category: string;
+  image: string;
+  heroImage: string;
+  content: {
+    sections: BlogDetailSection[];
+  };
+};

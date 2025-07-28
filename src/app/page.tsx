@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect, Suspense, lazy, memo, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, memo, useMemo, useCallback } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
-import { DemoDialogProps, DemoFormData, HeaderProps, HeroSectionProps, CTASectionProps } from '@/types';
+import { DemoDialogProps, DemoFormData, HeroSectionProps, CTASectionProps } from '@/types';
 import { useNavbar } from '@/hooks/useNavbar';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
