@@ -1,33 +1,17 @@
 "use client";
 
-import React, { useState, useEffect, memo, useMemo, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import Image from 'next/image';
-import dynamic from 'next/dynamic';
 import { DemoDialogProps, DemoFormData, HeroSectionProps, CTASectionProps } from '@/types';
 import { useNavbar } from '@/hooks/useNavbar';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 
-// Dynamic imports with loading states - better for code splitting
-const QuoteSection = dynamic(() => import('../components/landing/QuoteSection'), {
-  loading: () => <QuoteSectionPlaceholder />,
-  ssr: true
-});
-
-const FeaturesSection = dynamic(() => import('../components/landing/FeaturesSection'), {
-  loading: () => <FeaturesSectionPlaceholder />,
-  ssr: true
-});
-
-const PricingSection = dynamic(() => import('../components/landing/PricingSection'), {
-  loading: () => <PricingSectionPlaceholder />,
-  ssr: true
-});
-
-const FAQSection = dynamic(() => import('../components/landing/FAQSection'), {
-  loading: () => <FAQSectionPlaceholder />,
-  ssr: true
-});
+// Direct imports instead of dynamic
+import QuoteSection from '../components/landing/QuoteSection';
+import FeaturesSection from '../components/landing/FeaturesSection';
+import PricingSection from '../components/landing/PricingSection';
+import FAQSection from '../components/landing/FAQSection';
 
 const typography = {
   h1: "font-manrope font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl leading-tight",
@@ -42,134 +26,23 @@ const typography = {
   price: "font-manrope font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl",
 } as const;
 
-// Optimized placeholder components with reduced DOM complexity
-const QuoteSectionPlaceholder = memo(function QuoteSectionPlaceholder() {
-  return (
-    <section className="relative py-12 md:py-24 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-5/6 mx-auto">
-        <div className="text-right mb-12 md:mb-24">
-          <div className="max-w-4xl ml-auto space-y-4">
-            <div className="h-8 bg-gray-200 animate-pulse rounded w-3/4 ml-auto" />
-            <div className="h-6 bg-gray-200 animate-pulse rounded w-1/4 ml-auto" />
-          </div>
-        </div>
-        <div className="text-left space-y-4">
-          <div className="h-8 bg-gray-200 animate-pulse rounded w-1/3" />
-          <div className="h-8 bg-blue-200 animate-pulse rounded w-1/2" />
-        </div>
-      </div>
-    </section>
-  );
-});
-
-const FeaturesSectionPlaceholder = memo(function FeaturesSectionPlaceholder() {
-  return (
-    <section className="relative py-12 md:py-24 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-5/6 mx-auto">
-        <div className="text-center mb-16 md:mb-24 space-y-4">
-          <div className="h-4 bg-blue-200 animate-pulse rounded w-24 mx-auto" />
-          <div className="h-10 bg-gray-200 animate-pulse rounded w-1/2 mx-auto" />
-        </div>
-        <div className="space-y-16 md:space-y-24">
-          {Array.from({ length: 3 }, (_, index) => (
-            <div key={index} className="flex flex-col lg:flex-row items-center gap-8 md:gap-16">
-              <div className="flex-1 space-y-4">
-                <div className="w-16 h-16 bg-gray-200 animate-pulse rounded" />
-                <div className="h-8 bg-gray-200 animate-pulse rounded w-1/2" />
-                <div className="h-6 bg-gray-200 animate-pulse rounded w-3/4" />
-              </div>
-              <div className="flex-1">
-                <div className="w-full h-[400px] md:h-[500px] bg-gray-200 animate-pulse rounded-2xl" />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-});
-
-const PricingSectionPlaceholder = memo(function PricingSectionPlaceholder() {
-  return (
-    <section className="relative py-6 sm:py-8 md:py-12 lg:py-24 px-3 sm:px-4 lg:px-8">
-      <div className="w-full mx-auto">
-        <div className="text-center mb-6 sm:mb-8 md:mb-12 lg:mb-16 space-y-4">
-          <div className="h-4 bg-blue-200 animate-pulse rounded w-20 mx-auto" />
-          <div className="h-10 bg-gray-200 animate-pulse rounded w-1/3 mx-auto" />
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8 max-w-6xl mx-auto">
-          {Array.from({ length: 3 }, (_, index) => (
-            <div key={index} className="bg-white rounded-lg sm:rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 shadow-lg border border-gray-200">
-              <div className="space-y-4">
-                <div className="h-8 bg-gray-200 animate-pulse rounded w-1/2" />
-                <div className="h-4 bg-gray-200 animate-pulse rounded" />
-                <div className="h-12 bg-gray-200 animate-pulse rounded w-1/3" />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-});
-
-const FAQSectionPlaceholder = memo(function FAQSectionPlaceholder() {
-  return (
-    <section className="relative py-6 sm:py-8 md:py-12 lg:py-24 px-3 sm:px-4 lg:px-8">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-6 sm:mb-8 md:mb-12 lg:mb-16 space-y-4">
-          <div className="h-4 bg-blue-200 animate-pulse rounded w-32 mx-auto" />
-          <div className="h-10 bg-gray-200 animate-pulse rounded w-1/3 mx-auto" />
-        </div>
-        <div className="bg-white rounded-lg sm:rounded-xl border border-gray-200 overflow-hidden shadow-sm">
-          {Array.from({ length: 5 }, (_, index) => (
-            <div key={index} className={`p-4 ${index < 4 ? 'border-b border-gray-200' : ''}`}>
-              <div className="h-6 bg-gray-200 animate-pulse rounded w-3/4" />
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-});
-
-// Optimized Dialog Component
-const DemoDialog = memo(function DemoDialog({ isOpen, onClose, formData, setFormData }: DemoDialogProps) {
-  const employeeOptions = useMemo(() => [
+// Simplified Dialog Component
+function DemoDialog({ isOpen, onClose, formData, setFormData }: DemoDialogProps) {
+  const employeeOptions = [
     "1-10 employees",
     "11-50 employees", 
     "51-200 employees",
     "201-1000 employees",
     "1000+ employees"
-  ], []);
+  ];
 
-  const timelineOptions = useMemo(() => [
+  const timelineOptions = [
     "Within 1 month",
     "1-3 months",
     "3-6 months", 
     "6-12 months",
     "More than 1 year"
-  ], []);
-
-  // Optimized scroll lock
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const scrollY = window.scrollY;
-    const body = document.body;
-    
-    body.style.cssText = `
-      overflow: hidden;
-      position: fixed;
-      top: -${scrollY}px;
-      width: 100%;
-    `;
-    
-    return () => {
-      body.style.cssText = '';
-      window.scrollTo(0, scrollY);
-    };
-  }, [isOpen]);
+  ];
 
   const handleSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault();
@@ -199,7 +72,6 @@ const DemoDialog = memo(function DemoDialog({ isOpen, onClose, formData, setForm
               width={24} 
               height={24} 
               className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6"
-              loading="lazy"
             />
           </div>
           
@@ -227,7 +99,6 @@ const DemoDialog = memo(function DemoDialog({ isOpen, onClose, formData, setForm
               placeholder="Enter Your Name"
               className="w-full px-3 py-2.5 sm:px-3 sm:py-3 md:px-4 md:py-4 bg-gray-50 border-0 rounded-lg text-gray-700 text-xs sm:text-sm outline-none transition-all focus:bg-white focus:shadow-lg focus:ring-2 focus:ring-blue-500/20 placeholder-gray-400"
               required
-              aria-label="Name"
             />
           </div>
 
@@ -241,7 +112,6 @@ const DemoDialog = memo(function DemoDialog({ isOpen, onClose, formData, setForm
                 onChange={(e) => handleInputChange('employees', e.target.value)}
                 className="w-full px-3 py-2.5 sm:px-3 sm:py-3 md:px-4 md:py-4 bg-gray-50 border-0 rounded-lg text-gray-700 text-xs sm:text-sm outline-none appearance-none transition-all focus:bg-white focus:shadow-lg focus:ring-2 focus:ring-blue-500/20 cursor-pointer hover:bg-gray-100"
                 required
-                aria-label="Number of Employees"
               >
                 <option value="" disabled className="text-gray-400">Select Number of Employees Category</option>
                 {employeeOptions.map((option, index) => (
@@ -266,7 +136,6 @@ const DemoDialog = memo(function DemoDialog({ isOpen, onClose, formData, setForm
                 onChange={(e) => handleInputChange('timeline', e.target.value)}
                 className="w-full px-3 py-2.5 sm:px-3 sm:py-3 md:px-4 md:py-4 bg-gray-50 border-0 rounded-lg text-gray-700 text-xs sm:text-sm outline-none appearance-none transition-all focus:bg-white focus:shadow-lg focus:ring-2 focus:ring-blue-500/20 cursor-pointer hover:bg-gray-100"
                 required
-                aria-label="Timeline for Investing in GEO Strategy"
               >
                 <option value="" disabled className="text-gray-400">Select Timeline for Investing in GEO Strategy</option>
                 {timelineOptions.map((option, index) => (
@@ -332,10 +201,10 @@ const DemoDialog = memo(function DemoDialog({ isOpen, onClose, formData, setForm
       </div>
     </div>
   );
-});
+}
 
-// Optimized Hero Section
-const HeroSection = memo(function HeroSection({ email, setEmail, onEmailSubmit }: HeroSectionProps) {
+// Simplified Hero Section
+function HeroSection({ email, setEmail, onEmailSubmit }: HeroSectionProps) {
   const handleEmailChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   }, [setEmail]);
@@ -373,7 +242,6 @@ const HeroSection = memo(function HeroSection({ email, setEmail, onEmailSubmit }
                 onChange={handleEmailChange}
                 className="flex-1 ml-1.5 sm:ml-2 md:ml-4 bg-transparent border-none outline-none text-gray-600 placeholder-gray-400 text-xs sm:text-sm md:text-base lg:text-lg"
                 required
-                aria-label="Company Email"
               />
               <button
                 type="submit"
@@ -393,9 +261,6 @@ const HeroSection = memo(function HeroSection({ email, setEmail, onEmailSubmit }
               width={700}
               height={336}
               className="w-full h-auto"
-              loading="lazy"
-              placeholder="blur"
-              blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzAwIiBoZWlnaHQ9IjMzNiIgdmlld0JveD0iMCAwIDcwMCAzMzYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjcwMCIgaGVpZ2h0PSIzMzYiIGZpbGw9IiNmZmZmZmYiIG9wYWNpdHk9IjAuNSIvPjwvc3ZnPg=="
             />
           </div>
           
@@ -406,18 +271,15 @@ const HeroSection = memo(function HeroSection({ email, setEmail, onEmailSubmit }
               width={380}
               height={380}
               className="w-full h-auto"
-              loading="lazy"
-              placeholder="blur"
-              blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzgwIiBoZWlnaHQ9IjM4MCIgdmlld0JveD0iMCAwIDM4MCAzODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjM4MCIgaGVpZ2h0PSIzODAiIGZpbGw9IiNmZmZmZmYiIG9wYWNpdHk9IjAuNSIvPjwvc3ZnPg=="
             />
           </div>
         </div>
       </div>
     </section>
   );
-});
+}
 
-const CTASection = memo(function CTASection({ onDashboardClick }: CTASectionProps) {
+function CTASection({ onDashboardClick }: CTASectionProps) {
   return (
     <section className="relative px-3 sm:px-4 lg:px-8 pt-3 sm:pt-4 md:pt-8 lg:pt-12">
       <div className="relative rounded-t-xl sm:rounded-t-2xl md:rounded-t-3xl overflow-hidden flex items-center justify-center min-h-[250px] sm:min-h-[300px] md:min-h-[400px]" style={{
@@ -442,19 +304,18 @@ const CTASection = memo(function CTASection({ onDashboardClick }: CTASectionProp
               width={16} 
               height={16} 
               className="w-3 h-3 sm:w-3 sm:h-3 md:w-4 md:h-4"
-              loading="lazy"
             />
           </button>
         </div>
       </div>
     </section>
   );
-});
+}
 
 function LandingPage() {
-  const [email, setEmail] = useState<string>('');
-  const [isYearly, setIsYearly] = useState<boolean>(true);
-  const [expandedFaq, setExpandedFaq] = useState<number[]>([1]);
+  const [email, setEmail] = useState('');
+  const [isYearly, setIsYearly] = useState(true);
+  const [expandedFaq, setExpandedFaq] = useState([1]);
   
   const {
     showDemoDialog,
@@ -470,53 +331,6 @@ function LandingPage() {
       window.location.href = `/login?email=${encodeURIComponent(email)}`;
     }
   }, [email]);
-
-  // Optimized scroll lock
-  useEffect(() => {
-    if (!showDemoDialog) return;
-
-    const scrollY = window.scrollY;
-    const body = document.body;
-    
-    body.style.cssText = `
-      overflow: hidden;
-      position: fixed;
-      top: -${scrollY}px;
-      width: 100%;
-    `;
-    
-    return () => {
-      body.style.cssText = '';
-      window.scrollTo(0, scrollY);
-    };
-  }, [showDemoDialog]);
-
-  // Preload critical images
-  useEffect(() => {
-    const preloadImages = [
-      '/showonai-white.svg',
-      '/brand-mentions.svg',
-      '/sov.svg'
-    ];
-
-    const linkElements = preloadImages.map(src => {
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'image';
-      link.href = src;
-      return link;
-    });
-
-    linkElements.forEach(link => document.head.appendChild(link));
-
-    return () => {
-      linkElements.forEach(link => {
-        if (link.parentNode) {
-          link.parentNode.removeChild(link);
-        }
-      });
-    };
-  }, []);
 
   return (
     <div className="min-h-screen bg-blue-50 font-manrope scroll-smooth flex flex-col" style={{backgroundImage:'url(/landing-page.svg)', backgroundSize: 'cover', backgroundPosition: 'top center' }}>
@@ -559,21 +373,6 @@ function LandingPage() {
       <style jsx>{`
         .font-manrope {
           font-family: var(--font-manrope), system-ui, sans-serif;
-        }
-        @media (max-width: 768px) {
-          .animate-pulse {
-            animation-duration: 1.5s;
-          }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .animate-pulse {
-            animation: none;
-          }
-          .transition-all,
-          .transition-colors,
-          .transition-transform {
-            transition: none;
-          }
         }
       `}</style>
 
